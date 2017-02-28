@@ -27,8 +27,9 @@ type Config struct {
 	SshKey           string `json:"ssh-key"`
 	SshEncryptedKeys bool   `json:"ssh-encrypted-keys"`
 
-	Anonymous bool `json:"anonymous"`
-	LockPort  int  `json:"lock-port"`
+	Anonymous bool   `json:"anonymous"`
+	LockPort  int    `json:"lock-port"`
+	Cache     string `json:cache`
 }
 
 // Save persists the Config to the database
@@ -84,6 +85,14 @@ func (c *Config) makeValid() {
 
 	if c.SshKey == "" {
 		c.SshKey = "default"
+	}
+
+	if c.Cache == "" {
+		c.Cache = "single"
+	}
+
+	if c.Cache != "single" && c.Cache != "shared" {
+		c.Cache = "single"
 	}
 
 	if c.LockPort == 0 {

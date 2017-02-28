@@ -24,6 +24,12 @@ func CompileConfig(image string) docker.ContainerConfig {
 		}
 	}
 
+	cache := fmt.Sprintf("nanobox_%s_cache:/mnt/cache", env)
+	configModel, _ := models.LoadConfig()
+	if configModel.Cache == "shared" {
+		cache = "nanobox_cache:/mtn/cache"
+	}
+
 	conf := docker.ContainerConfig{
 		Name:    CompileName(),
 		Image:   image,
@@ -36,7 +42,7 @@ func CompileConfig(image string) docker.ContainerConfig {
 			// fmt.Sprintf("%s%s/cache:/mnt/cache", provider.HostMntDir(), env),
 			fmt.Sprintf("nanobox_%s_build:/data", env),
 			fmt.Sprintf("nanobox_%s_app:/mnt/app", env),
-			fmt.Sprintf("nanobox_%s_cache:/mnt/cache", env),
+			cache,
 		},
 		RestartPolicy: "no",
 	}
