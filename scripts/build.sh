@@ -32,7 +32,8 @@ gox -ldflags "-s -w -X github.com/mu-box/microbox/util/odin.apiKey=$API_KEY \
 			  -X github.com/mu-box/microbox/models.microVersion=$(getCurrTag) \
 			  -X github.com/mu-box/microbox/models.microCommit=$(getCurrCommit) \
 			  -X github.com/mu-box/microbox/models.microBuild=$BUILD_DATE" \
-			  -osarch "darwin/amd64 darwin/arm64 linux/amd64 linux/arm linux/arm64 linux/s390x windows/amd64" -output="./.build/$(getTagDir)/{{.OS}}/{{.Arch}}/microbox"
+			  -osarch "darwin/amd64 darwin/arm64 linux/amd64 linux/arm linux/arm64 linux/s390x windows/amd64" \
+        -output="./.build/$(getTagDir)/{{.OS}}/{{.Arch}}/microbox"
 
 printf "\nWriting version file...\n"
 echo -n "Microbox Version $(getCurrTag)-$BUILD_DATE ($(getCurrCommit))" > ./.build/$(getTagDir)/version
@@ -40,7 +41,10 @@ echo -n "Microbox Version $(getCurrTag)-$BUILD_DATE ($(getCurrCommit))" > ./.bui
 printf "\nBuilding microbox updater...\n"
 
 # change into updater directory and build microbox updater
-cd ./updater && gox -osarch "darwin/amd64 darwin/arm64 linux/amd64 linux/arm linux/arm64 linux/s390x windows/amd64" -ldflags="-s" -output="../.build/$(getTagDir)/{{.OS}}/{{.Arch}}/microbox-update"
+cd ./updater && \
+  gox -ldflags="-s" \
+    -osarch "darwin/amd64 darwin/arm64 linux/amd64 linux/arm linux/arm64 linux/s390x windows/amd64" \
+    -output="../.build/$(getTagDir)/{{.OS}}/{{.Arch}}/microbox-update"
 
 #cd ..
 

@@ -51,6 +51,9 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v2
+        # Grab all commits so that we get the most recent tag, too
+        with:
+          fetch-depth: 0
 
         # the default image for act doesn't include this tool, but the actual GHA environment does...
       - name: (LOCAL ONLY) Install AWS CLI
@@ -72,6 +75,8 @@ jobs:
       - name: Build
         run: |
           ./scripts/build.sh
+        env:
+          API_KEY: ${{ secrets.CORE_API_KEY }}
 
       - name: Configure AWS credentials for publication
         uses: aws-actions/configure-aws-credentials@v1
