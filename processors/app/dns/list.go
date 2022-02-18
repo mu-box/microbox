@@ -3,8 +3,8 @@ package dns
 import (
 	"fmt"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/dns"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/dns"
 )
 
 // List lists all dns entries for an app

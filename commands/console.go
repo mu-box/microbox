@@ -6,15 +6,15 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/processors/env"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/console"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/processors/env"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/console"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -48,7 +48,7 @@ func consoleFn(ccmd *cobra.Command, args []string) {
 Wrong number of arguments (expecting 1 got %v). Run the command again with the
 name of the component you wish to console into:
 
-ex: nanobox console dry-run web.site
+ex: microbox console dry-run web.site
 
 `, len(args))
 		return
@@ -60,7 +60,7 @@ ex: nanobox console dry-run web.site
 			Message: "Console to local code node not valid",
 			Code:    "USER",
 			Stack:   []string{"failed to console"},
-			Suggest: "It appears you are trying to console to a local code node. Please use `nanobox run` instead.",
+			Suggest: "It appears you are trying to console to a local code node. Please use `microbox run` instead.",
 		})
 		return
 	}

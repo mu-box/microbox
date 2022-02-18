@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 func ConfigureSet(key, val string) error {

@@ -11,7 +11,7 @@ import (
 	// "github.com/jcelliott/lumber"
 
 	"github.com/lyondhill/vtclean"
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/util"
 )
 
 // ...
@@ -89,7 +89,7 @@ func (s *Summarizer) Pause() {
 // Resume prints the "complete" label and toggles shutdown
 func (s *Summarizer) Resume() {
 	// generate and print the complete header
-	s.Label = s.Label
+	// s.Label = s.Label
 
 	// turn the ticker back on
 	s.shutdown = false

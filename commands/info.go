@@ -5,11 +5,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/app"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/app"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -30,7 +30,7 @@ specify which environment you would like information about.
 func infoFn(ccmd *cobra.Command, args []string) {
 
 	env, _ := models.FindEnvByID(config.EnvID())
-	args, location, name := helpers.Endpoint(env, args, 0)
+	_, location, name := helpers.Endpoint(env, args, 0)
 
 	switch location {
 	case "local":

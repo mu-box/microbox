@@ -6,21 +6,21 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
-	"github.com/nanobox-io/nanobox-boxfile"
+	docker "github.com/mu-box/golang-docker-client"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	container_generator "github.com/nanobox-io/nanobox/generators/containers"
-	build_generator "github.com/nanobox-io/nanobox/generators/hooks/build"
+	container_generator "github.com/mu-box/microbox/generators/containers"
+	build_generator "github.com/mu-box/microbox/generators/hooks/build"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/env"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/console"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/hookit"
-	"github.com/nanobox-io/nanobox/util/locker"
-	"github.com/nanobox-io/nanobox/util/provider"
-	"github.com/nanobox-io/nanobox/util/watch"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/env"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/console"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/hookit"
+	"github.com/mu-box/microbox/util/locker"
+	"github.com/mu-box/microbox/util/provider"
+	"github.com/mu-box/microbox/util/watch"
 )
 
 // Run a code container with your runtime installed
@@ -41,7 +41,7 @@ func Run(envModel *models.Env, appModel *models.App, consoleConfig console.Conso
 
 	// create a dummy component using the appname
 	component := &models.Component{
-		ID: "nanobox_" + appModel.ID,
+		ID: "microbox_" + appModel.ID,
 	}
 
 	consoleConfig.DevIP = appModel.LocalIPs["env"]
@@ -104,7 +104,7 @@ func setup(appModel *models.App) error {
 		// handle 'exec failed: argument list too long' error
 		if strings.Contains(out, "argument list too long") {
 			if err2, ok := err.(util.Err); ok {
-				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `nanobox config set ssh-key ~/.ssh/id_rsa`"
+				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `microbox config set ssh-key ~/.ssh/id_rsa`"
 				err2.Output = out
 				err2.Code = "1001"
 				return util.ErrorAppend(err2, "failed to run the (run)user hook")
@@ -144,7 +144,7 @@ func teardown(appModel *models.App) error {
 	// remove the container
 	if err := docker.ContainerRemove(container.ID); err != nil {
 		lumber.Error("dev:console:teardown:docker.ContainerRemove(%s): %s", container.ID, err)
-		// prechecking for the containers existance does not guarantee it exists
+		// prechecking for the containers existence does not guarantee it exists
 		// return util.ErrorAppend(err, "failed to remove dev container")
 	}
 

@@ -3,9 +3,9 @@ package component
 import (
 	"fmt"
 
-	"github.com/nanobox-io/nanobox-boxfile"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 // componentConfig returns the config data from the component boxfile

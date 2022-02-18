@@ -5,11 +5,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	app_dns "github.com/nanobox-io/nanobox/processors/app/dns"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	app_dns "github.com/mu-box/microbox/processors/app/dns"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // RemoveAllCmd ...

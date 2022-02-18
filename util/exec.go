@@ -6,7 +6,7 @@ import (
 	"io"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 )
 
 // Cmd ...
@@ -105,7 +105,7 @@ func DockerCommand(id, user, path string, args []string) *Cmd {
 }
 
 // Exec is a shortcut for the process that turns the interface into a one liner
-// the recieved stream is used for display or error handling as the Stderr portion
+// the received stream is used for display or error handling as the Stderr portion
 // while the Stdout is left blank to allow the run command to set a bytes buffer
 // which is then returned from the Output() function
 func DockerExec(id, user, name string, args []string, stream io.Writer) (string, error) {

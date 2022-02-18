@@ -5,15 +5,15 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 var (
 
-	// VersionCmd prints the nanobox version.
+	// VersionCmd prints the microbox version.
 	VersionCmd = &cobra.Command{
 		Use:              "version",
-		Short:            "Show the current Nanobox version.",
+		Short:            "Show the current Microbox version.",
 		Long:             ``,
 		PersistentPreRun: func(ccmd *cobra.Command, args []string) {},
 		Run:              versionFn,

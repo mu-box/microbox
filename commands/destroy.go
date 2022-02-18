@@ -2,15 +2,16 @@ package commands
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/app"
-	"github.com/nanobox-io/nanobox/processors/env"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/app"
+	"github.com/mu-box/microbox/processors/env"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -18,9 +19,9 @@ var (
 	// DestroyCmd ...
 	DestroyCmd = &cobra.Command{
 		Use:   "destroy",
-		Short: "Destroy the current project and remove it from Nanobox.",
+		Short: "Destroy the current project and remove it from Microbox.",
 		Long: `
-Destroys the current project and removes it from Nanobox – destroying
+Destroys the current project and removes it from Microbox – destroying
 the filesystem mount, associated dns aliases, and local app data.
 		`,
 		PreRun: steps.Run("start"),
@@ -32,7 +33,7 @@ the filesystem mount, associated dns aliases, and local app data.
 func destroyFunc(ccmd *cobra.Command, args []string) {
 	envModel, err := models.FindEnvByID(config.EnvID())
 	if err != nil {
-		fmt.Println("This project doesn't exist on nanobox.")
+		fmt.Println("This project doesn't exist on microbox.")
 		return
 	}
 

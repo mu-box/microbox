@@ -3,7 +3,7 @@ package commands
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/evar"
+	"github.com/mu-box/microbox/commands/evar"
 )
 
 var (

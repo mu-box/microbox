@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/util"
 )
 
 func TestRetry(t *testing.T) {
@@ -25,7 +25,7 @@ func TestRetry(t *testing.T) {
 
 	err = util.Retry(failingFunc, 3, time.Nanosecond)
 	if err != nil {
-		t.Errorf("func succeeded but i recieved an error")
+		t.Errorf("func succeeded but i received an error")
 	}
 
 }

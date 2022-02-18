@@ -1,17 +1,17 @@
 package processors
 
 import (
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/code"
-	"github.com/nanobox-io/nanobox/processors/env"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/locker"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/code"
+	"github.com/mu-box/microbox/processors/env"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/locker"
 )
 
 // Build sets up the environment and runs a code build
 func Build(envModel *models.Env) error {
-	// by aquiring a local lock we are only allowing
+	// by acquiring a local lock we are only allowing
 	// one build to happen at a time
 	locker.LocalLock()
 	defer locker.LocalUnlock()

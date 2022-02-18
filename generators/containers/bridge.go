@@ -1,16 +1,16 @@
 package containers
 
 import (
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/util/dhcp"
+	"github.com/mu-box/microbox/util/dhcp"
 )
 
 // BridgeConfig generates the container configuration for a component container
 func BridgeConfig() docker.ContainerConfig {
 	return docker.ContainerConfig{
 		Name:          BridgeName(),
-		Image:         "nanobox/bridge",
+		Image:         "mubox/bridge",
 		Network:       "virt",
 		IP:            reserveIP(),
 		RestartPolicy: "always",
@@ -20,7 +20,7 @@ func BridgeConfig() docker.ContainerConfig {
 
 // BridgeName returns the name of the component container
 func BridgeName() string {
-	return "nanobox_bridge"
+	return "microbox_bridge"
 }
 
 // reserveIP reserves a local IP for the build container

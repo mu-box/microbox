@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/console"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/console"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // since `--debug` runs the command twice, combined prevents duplication of the error output.
@@ -25,7 +25,7 @@ func Exec(container, hook, payload, displayLevel string) (string, error) {
 
 	stream.CaptureOutput(true)
 
-	out, err := util.DockerExec(container, "root", "/opt/nanobox/hooks/"+hook, []string{payload}, stream)
+	out, err := util.DockerExec(container, "root", "/opt/microbox/hooks/"+hook, []string{payload}, stream)
 	if err != nil && (strings.Contains(string(out), "such file or directory") && strings.Contains(err.Error(), "bad exit code(126)")) {
 		// if its a 126 the hook didnt exist
 		return "", nil

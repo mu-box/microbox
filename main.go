@@ -1,10 +1,10 @@
-// Nanobox automates the creation of isolated, repeatable environments for local
-// and production applications. When developing locally, Nanobox provisions your
+// Microbox automates the creation of isolated, repeatable environments for local
+// and production applications. When developing locally, Microbox provisions your
 // app's infrastructure inside of a virtual machine (VM) and mounts your local
 // codebase into the VM. Any changes made to your codebase are reflected inside
 // the virtual environment.
 //
-// Once code is built and tested locally, Nanobox provisions and deploys an
+// Once code is built and tested locally, Microbox provisions and deploys an
 // identical infrastructure on a production platform.
 package main
 
@@ -19,20 +19,20 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/commands"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	proc_provider "github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/commands"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	proc_provider "github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 // main
 func main() {
 	// setup a file logger, this will be replaced in verbose mode.
-	fileLogger, err := lumber.NewTruncateLogger(filepath.ToSlash(filepath.Join(config.GlobalDir(), "nanobox.log")))
+	fileLogger, err := lumber.NewTruncateLogger(filepath.ToSlash(filepath.Join(config.GlobalDir(), "microbox.log")))
 	if err != nil {
 		fmt.Println("logging error:", err)
 	}
@@ -51,7 +51,7 @@ func main() {
 		os.Args[1] == "log" ||
 		os.Args[1] == "login" ||
 		os.Args[1] == "logout") {
-		err := commands.NanoboxCmd.Execute()
+		err := commands.MicroboxCmd.Execute()
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
@@ -85,7 +85,7 @@ func main() {
 	// so it has to be done at the beginning even if we dont need it
 	providerName := configModel.Provider
 
-	// make sure nanobox has all the necessry parts
+	// make sure microbox has all the necessry parts
 	if !strings.Contains(command, " config") && !strings.Contains(command, " server") {
 		err, missingParts := provider.Valid()
 		if err != nil {
@@ -112,13 +112,13 @@ func main() {
 			lumber.Fatal(fmt.Sprintf("Cause of failure: %v", r))
 			lumber.Fatal(fmt.Sprintf("Error output:\n%v\n", string(stack)))
 			lumber.Close()
-			fmt.Println("Nanobox encountered an unexpected error. Please see ~/.nanobox/nanobox.log and submit the issue to us.")
+			fmt.Println("Microbox encountered an unexpected error. Please see ~/.microbox/microbox.log and submit the issue to us.")
 			os.Exit(1)
 		}
 	}()
 
 	//
-	commands.NanoboxCmd.Execute()
+	commands.MicroboxCmd.Execute()
 }
 
 func badTerminal() bool {

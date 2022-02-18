@@ -11,9 +11,9 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // Native ...
@@ -74,7 +74,7 @@ func (native Native) Implode() error {
 	containers := []string{}
 
 	for _, part := range parts {
-		if strings.Contains(part, "nanobox_") {
+		if strings.Contains(part, "microbox_") {
 			containers = append(containers, strings.Fields(part)[0])
 		}
 	}
@@ -92,12 +92,12 @@ func (native Native) Implode() error {
 
 // Destroy does nothing on native
 func (native Native) Destroy() error {
-	// TODO: remove nanobox images
+	// TODO: remove microbox images
 
 	if native.hasNetwork() {
 		display.StartTask("Removing custom docker network...")
 
-		cmd := exec.Command("docker", "network", "rm", "nanobox")
+		cmd := exec.Command("docker", "network", "rm", "microbox")
 
 		cmd.Stdout = display.NewStreamer("  ")
 		cmd.Stderr = display.NewStreamer("  ")
@@ -142,7 +142,7 @@ func (native Native) Start() error {
 					return err
 				}
 
-				cmd := exec.Command("docker", "network", "create", "--driver=bridge", fmt.Sprintf("--subnet=%s", ipNet.String()), "--opt=\"com.docker.network.driver.mtu=1450\"", "--opt=\"com.docker.network.bridge.name=redd0\"", fmt.Sprintf("--gateway=%s", ip.String()), "nanobox")
+				cmd := exec.Command("docker", "network", "create", "--driver=bridge", fmt.Sprintf("--subnet=%s", ipNet.String()), "--opt=\"com.docker.network.driver.mtu=1450\"", "--opt=\"com.docker.network.bridge.name=redd0\"", fmt.Sprintf("--gateway=%s", ip.String()), "microbox")
 
 				cmd.Stdout = display.NewStreamer("  ")
 				cmd.Stderr = display.NewStreamer("  ")
@@ -177,7 +177,7 @@ func (native Native) Start() error {
 			return err
 		}
 
-		cmd := exec.Command("docker", "network", "create", "--driver=bridge", fmt.Sprintf("--subnet=%s", ipNet.String()), "--opt=\"com.docker.network.driver.mtu=1450\"", "--opt=\"com.docker.network.bridge.name=redd0\"", fmt.Sprintf("--gateway=%s", ip.String()), "nanobox")
+		cmd := exec.Command("docker", "network", "create", "--driver=bridge", fmt.Sprintf("--subnet=%s", ipNet.String()), "--opt=\"com.docker.network.driver.mtu=1450\"", "--opt=\"com.docker.network.bridge.name=redd0\"", fmt.Sprintf("--gateway=%s", ip.String()), "microbox")
 
 		cmd.Stdout = display.NewStreamer("  ")
 		cmd.Stderr = display.NewStreamer("  ")
@@ -327,8 +327,8 @@ func (native Native) RemoveEnvDir(id string) error {
 // hasNetwork ...
 func (native Native) hasNetwork() bool {
 
-	// docker-machine ssh nanobox docker network inspect nanobox
-	cmd := exec.Command("docker", "network", "inspect", "nanobox")
+	// docker-machine ssh microbox docker network inspect microbox
+	cmd := exec.Command("docker", "network", "inspect", "microbox")
 	b, err := cmd.CombinedOutput()
 
 	//

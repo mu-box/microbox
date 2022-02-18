@@ -1,12 +1,13 @@
-package nanoagent
+package microagent
 
 import (
 	"fmt"
-	"github.com/nanobox-io/golang-ssh"
 	"strconv"
 	"strings"
 
-	"github.com/nanobox-io/nanobox/util/display"
+	ssh "github.com/mu-box/golang-ssh"
+
+	"github.com/mu-box/microbox/util/display"
 )
 
 func SSH(key, location string) error {
@@ -25,7 +26,7 @@ func SSH(key, location string) error {
 	}
 
 	// establish connection
-	client, err := ssh.NewNativeClient(key, locationParts[0], "SSH-2.0-nanobox", port, &nanPass)
+	client, err := ssh.NewNativeClient(key, locationParts[0], "SSH-2.0-microbox", port, &nanPass)
 	if err != nil {
 		return fmt.Errorf("Failed to create new client - %s", err)
 	}

@@ -9,9 +9,9 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/env/share"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/env/share"
 )
 
 func (machine DockerMachine) RequiresMount() bool {
@@ -24,7 +24,7 @@ func (machine DockerMachine) HasMount(mount string) bool {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"cat",
 		"/proc/mounts",
@@ -41,7 +41,7 @@ func (machine DockerMachine) HasMount(mount string) bool {
 
 func (machine DockerMachine) staleMount(mount string) bool {
 
-	// removed the ensure statment because its slow and already installed
+	// removed the ensure statement because its slow and already installed
 	// // ensure stat is installed
 	// cmd := []string{"sh", "-c", setupCoreUtilsScript()}
 	// if b, err := Run(cmd); err != nil {
@@ -82,7 +82,7 @@ func (machine DockerMachine) AddMount(local, host string) error {
 	case "netfs":
 
 		// add netfs share
-		// here we use the processor so we can do privilage exec
+		// here we use the processor so we can do privilege exec
 		lumber.Info("adding share in netfs for %s", local)
 		if err := share.Add(local); err != nil {
 			return err
@@ -148,7 +148,7 @@ func (machine DockerMachine) hasShare(local, host string) bool {
 	cmd := []string{
 		vboxManageCmd,
 		"showvminfo",
-		"nanobox",
+		"microbox",
 		"--machinereadable",
 	}
 
@@ -177,7 +177,7 @@ func (machine DockerMachine) addShare(local, host string) error {
 		vboxManageCmd,
 		"sharedfolder",
 		"add",
-		"nanobox",
+		"microbox",
 		"--name",
 		name,
 		"--hostpath",
@@ -214,7 +214,7 @@ func (machine DockerMachine) removeShare(local, host string) error {
 		vboxManageCmd,
 		"sharedfolder",
 		"remove",
-		"nanobox",
+		"microbox",
 		"--name",
 		name,
 		"--transient",
@@ -242,7 +242,7 @@ func (machine DockerMachine) addNativeMount(local, host string) error {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"mkdir",
 		"-p",
@@ -261,7 +261,7 @@ func (machine DockerMachine) addNativeMount(local, host string) error {
 	cmd = []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"mount",
 		"-t",
@@ -289,7 +289,7 @@ func (machine DockerMachine) removeNativeMount(local, host string) error {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"umount",
 		"-f",

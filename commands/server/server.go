@@ -13,19 +13,19 @@ import (
 	"github.com/jcelliott/lumber"
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/update"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/update"
 )
 
 var ServerCmd = &cobra.Command{
 	Use:   "server",
-	Short: "Start a dedicated nanobox server",
+	Short: "Start a dedicated microbox server",
 	Long:  ``,
 	Run:   serverFnc,
 }
 
-const name = "nanobox-server"
+const name = "microbox-server"
 
 func serverFnc(ccmd *cobra.Command, args []string) {
 	if !util.IsPrivileged() {
@@ -37,7 +37,7 @@ func serverFnc(ccmd *cobra.Command, args []string) {
 
 	// set the logger on linux and osx to go to /var/log
 	if runtime.GOOS != "windows" {
-		fileLogger, err := lumber.NewTruncateLogger("/var/log/nanobox.log")
+		fileLogger, err := lumber.NewTruncateLogger("/var/log/microbox.log")
 		if err != nil {
 			fmt.Printf("logging error:%s\n", err)
 		}
@@ -45,7 +45,7 @@ func serverFnc(ccmd *cobra.Command, args []string) {
 		lumber.SetLogger(fileLogger)
 	}
 
-	lumber.Info("Starting nanobox server...")
+	lumber.Info("Starting microbox server...")
 
 	// fire up the service manager (only required on windows)
 	go svcStart()
@@ -59,7 +59,7 @@ func serverFnc(ccmd *cobra.Command, args []string) {
 	err := startTAP()
 	if err != nil {
 		lumber.Info("Failed to load tap driver - %s", err.Error())
-		// err 102 for nanobox means kext failed to load
+		// err 102 for microbox means kext failed to load
 		os.Exit(102)
 	}
 	lumber.Info("Tap driver loaded.")
@@ -77,7 +77,7 @@ func serverFnc(ccmd *cobra.Command, args []string) {
 		return
 	}
 
-	lumber.Info("Nanobox server listening")
+	lumber.Info("Microbox server listening")
 
 	// listen for new connections forever
 	for {
@@ -92,24 +92,24 @@ func serverFnc(ccmd *cobra.Command, args []string) {
 
 // updateUpdater used to be a temporary means to update everyone's updater,
 // but it is quite useful so we will leave it in. Maybe in the future we'll
-// try updating nanobox itself prior to starting.
+// try updating microbox itself prior to starting.
 func updateUpdater() {
-	lumber.Info("Updating nanobox-update")
-	update.Name = strings.Replace(update.Name, "nanobox", "nanobox-update", 1)
-	update.TmpName = strings.Replace(update.TmpName, "nanobox", "nanobox-update", 1)
+	lumber.Info("Updating microbox-update")
+	update.Name = strings.Replace(update.Name, "microbox", "microbox-update", 1)
+	update.TmpName = strings.Replace(update.TmpName, "microbox", "microbox-update", 1)
 
-	// this gets the path to nanobox (assumes nanobox-update is at same location)
-	lumber.Info("Attempting to find nanobox - %s", os.Args[0])
+	// this gets the path to microbox (assumes microbox-update is at same location)
+	lumber.Info("Attempting to find microbox - %s", os.Args[0])
 	path, err := exec.LookPath(os.Args[0])
 	if err != nil {
-		lumber.Info("Failed to find nanobox - %s", err.Error())
+		lumber.Info("Failed to find microbox - %s", err.Error())
 		return
 	}
-	path = strings.Replace(path, "nanobox", "nanobox-update", 1)
+	path = strings.Replace(path, "microbox", "microbox-update", 1)
 	lumber.Info("Updating - %s", path)
 	err = update.Run(path)
 	if err != nil {
-		lumber.Info("Failed to update `nanobox-update` - %s", err.Error())
+		lumber.Info("Failed to update `microbox-update` - %s", err.Error())
 		return
 	}
 	lumber.Info("Update complete")
@@ -131,7 +131,7 @@ func ClientRun(funcName string, args interface{}, response interface{}) error {
 	return nil
 }
 
-// the tap driver needs to be loaded anytime nanobox is running the vpn (always on osx)
+// the tap driver needs to be loaded anytime microbox is running the vpn (always on osx)
 func startTAP() error {
 	if runtime.GOOS != "darwin" {
 		return nil

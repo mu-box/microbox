@@ -6,16 +6,16 @@ import (
 	"strings"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/app/dns"
-	"github.com/nanobox-io/nanobox/processors/component"
-	"github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/dhcp"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/locker"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/app/dns"
+	"github.com/mu-box/microbox/processors/component"
+	"github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/dhcp"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/locker"
 )
 
 // Destroy removes the app from the provider and the database
@@ -48,7 +48,7 @@ func Destroy(appModel *models.App) error {
 	defer display.CloseContext()
 
 	// remove the dev container if there is one
-	docker.ContainerRemove(fmt.Sprintf("nanobox_%s", appModel.ID))
+	docker.ContainerRemove(fmt.Sprintf("microbox_%s", appModel.ID))
 
 	// destroy the associated components
 	if err := destroyComponents(appModel); err != nil {
@@ -122,7 +122,7 @@ func cleanImages() {
 	for _, image := range images {
 		for _, tag := range image.RepoTags {
 			// if there is a tag that is not our build and it is one of ours.. try removing it (without force)
-			if tag != "" && !strings.HasPrefix(tag, "nanobox/build") && strings.HasPrefix(tag, "nanobox/") {
+			if tag != "" && !strings.HasPrefix(tag, "mubox/build") && strings.HasPrefix(tag, "mubox/") {
 				tag = strings.Replace(tag, ":latest", "", 1)
 				docker.ImageRemove(tag, false)
 			}

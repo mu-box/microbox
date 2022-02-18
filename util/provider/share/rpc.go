@@ -1,7 +1,7 @@
 package share
 
 import (
-	"github.com/nanobox-io/nanobox/commands/server"
+	"github.com/mu-box/microbox/commands/server"
 )
 
 type ShareRPC struct{}

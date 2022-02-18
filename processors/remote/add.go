@@ -3,12 +3,12 @@ package remote
 import (
 	"fmt"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 func Add(envModel *models.Env, appName, alias string) error {
@@ -29,9 +29,9 @@ func Add(envModel *models.Env, appName, alias string) error {
 	}
 
 	endpoint := registry.GetString("endpoint")
-	// set the endpoint to nanobox if it's missing
+	// set the endpoint to microbox if it's missing
 	if endpoint == "" {
-		endpoint = "nanobox"
+		endpoint = "microbox"
 	}
 
 	// set the odin endpoint

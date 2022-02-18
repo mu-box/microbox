@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 package util
@@ -53,8 +54,8 @@ func PrivilegeExec(command string) error {
 	// ensure the command is prepared to be used in powershell escalation
 	// command = preparePrivilegeCmd(command)
 
-	// add the --internal flag if the command is nanobox
-	if strings.HasPrefix(command, "nanobox ") {
+	// add the --internal flag if the command is microbox
+	if strings.HasPrefix(command, "microbox ") {
 		command = fmt.Sprintf("%s --internal", command)
 	}
 

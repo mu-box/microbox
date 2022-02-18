@@ -107,7 +107,7 @@ func Error(err error) error {
 }
 
 // prepend the new message to the stack on our error messages
-// this is usefull because delimiting stack elements by :
+// this is useful because delimiting stack elements by :
 // is not sufficient
 func ErrorAppend(err error, fmtStr string, args ...interface{}) error {
 	if err == nil {

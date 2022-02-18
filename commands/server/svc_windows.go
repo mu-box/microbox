@@ -12,9 +12,9 @@ import (
 
 var elog debug.Log
 
-type nanoboxServer struct{}
+type microboxServer struct{}
 
-func (ns *nanoboxServer) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- svc.Status) (ssec bool, errno uint32) {
+func (ns *microboxServer) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- svc.Status) (ssec bool, errno uint32) {
 	elog.Info(1, fmt.Sprintf("execute called"))
 	const cmdsAccepted = svc.AcceptStop | svc.AcceptShutdown
 	changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
@@ -51,7 +51,7 @@ func svcStart() {
 	defer elog.Close()
 
 	elog.Info(1, fmt.Sprintf("starting %s service", name))
-	err = svc.Run(name, &nanoboxServer{})
+	err = svc.Run(name, &microboxServer{})
 	if err != nil {
 		elog.Error(1, fmt.Sprintf("%s service failed: %v", name, err))
 		return

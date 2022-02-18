@@ -3,9 +3,9 @@ package containers
 import (
 	"fmt"
 
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 // ComponentConfig generates the container configuration for a component container
@@ -26,5 +26,5 @@ func ComponentConfig(componentModel *models.Component) docker.ContainerConfig {
 
 // ComponentName returns the name of the component container
 func ComponentName(componentModel *models.Component) string {
-	return fmt.Sprintf("nanobox_%s_%s", componentModel.AppID, componentModel.Name)
+	return fmt.Sprintf("microbox_%s_%s", componentModel.AppID, componentModel.Name)
 }

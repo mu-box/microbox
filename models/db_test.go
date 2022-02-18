@@ -10,8 +10,8 @@ type data struct {
 }
 
 func init() {
-	// initialize the db in the .nanobox directory
-	DB = "/tmp/nanobox-test.db"
+	// initialize the db in the .microbox directory
+	DB = "/tmp/microbox-test.db"
 }
 
 func TestPut(t *testing.T) {

@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/util/config"
 )
 
 // App ...
@@ -130,10 +130,7 @@ func AllApps() ([]*App, error) {
 			return apps, fmt.Errorf("failed to load env apps: %s", err.Error())
 		}
 
-		for _, app := range envApps {
-			// append to the apps that we'll return
-			apps = append(apps, app)
-		}
+		apps = append(apps, envApps...)
 	}
 
 	return apps, nil

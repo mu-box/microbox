@@ -6,7 +6,7 @@ import (
 
 // Auth ...
 type Auth struct {
-	Endpoint string // nanobox, bonesalt, dev, sim
+	Endpoint string // microbox, wycrobox, dev, sim
 	Key      string // api_token from dashboard
 }
 
@@ -32,10 +32,10 @@ func (a *Auth) Delete() error {
 	return DeleteAuth(a.Endpoint)
 }
 
-// LoadAuth loads the default (nanobox) auth entry
+// LoadAuth loads the default (microbox) auth entry
 func LoadAuth() (*Auth, error) {
 	auth := &Auth{
-		Endpoint: "nanobox",
+		Endpoint: "microbox",
 	}
 
 	if err := get("auths", auth.Endpoint, &auth); err != nil {

@@ -4,11 +4,11 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 // Init initializes the docker client for the provider

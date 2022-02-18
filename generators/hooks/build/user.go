@@ -13,9 +13,9 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // UserPayload returns a string for the user hook payload

@@ -2,10 +2,10 @@
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
 <assemblyIdentity
     version="9.0.0.0"
-    name="nanobox.exe"
+    name="microbox.exe"
     type="win32"
 />
-<description>Nanobox</description>
+<description>Microbox</description>
 <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
     <security>
         <requestedPrivileges>

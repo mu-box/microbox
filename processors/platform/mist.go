@@ -6,11 +6,11 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/nanopack/mist/clients"
+	"github.com/mu-box/mist/clients"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // MistListen ...
@@ -48,7 +48,7 @@ waiting for output...
 
 `)
 
-	// loop waiting for messages or signals if we recieve a kill signal quit
+	// loop waiting for messages or signals if we receive a kill signal quit
 	// messages will be displayed
 	for {
 		select {

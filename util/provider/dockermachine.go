@@ -7,22 +7,24 @@ import (
 	"net"
 	"os"
 	"os/exec"
+
 	// "path/filepath"
 	"io"
 	"regexp"
 	"runtime"
 	"strings"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	// "github.com/nanobox-io/nanobox/util/fileutil"
-	"github.com/nanobox-io/nanobox/util/vbox"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+
+	// "github.com/mu-box/microbox/util/fileutil"
+	"github.com/mu-box/microbox/util/vbox"
 )
 
 var (
 	vboxManageCmd    = vbox.DetectVBoxManageCmd()
-	dockerMachineCmd = "nanobox-machine"
+	dockerMachineCmd = "microbox-machine"
 )
 
 // DockerMachine ...
@@ -107,7 +109,7 @@ func (machine DockerMachine) Valid() (error, []string) {
 }
 
 func (machine DockerMachine) Status() string {
-	cmd := exec.Command(dockerMachineCmd, "status", "nanobox")
+	cmd := exec.Command(dockerMachineCmd, "status", "microbox")
 	output, _ := cmd.CombinedOutput()
 	return strings.TrimSpace(string(output))
 }
@@ -125,7 +127,7 @@ func (machine DockerMachine) Create() error {
 	}
 
 	// make sure dockermachine is clean
-	exec.Command(dockerMachineCmd, "rm", "-f", "nanobox").Run()
+	exec.Command(dockerMachineCmd, "rm", "-f", "microbox").Run()
 
 	display.ProviderSetup()
 
@@ -177,7 +179,7 @@ func (machine DockerMachine) Create() error {
 		cmd = append(cmd, "--virtualbox-disk-size", fmt.Sprintf("%d", disk))
 	}
 
-	cmd = append(cmd, "nanobox")
+	cmd = append(cmd, "microbox")
 
 	process := exec.Command(cmd[0], cmd[1:]...)
 
@@ -191,7 +193,7 @@ func (machine DockerMachine) Create() error {
 	display.StartTask("Launching VM")
 
 	if err := process.Run(); err != nil {
-		// if its complainging about the world writable error issue
+		// if its complaining about the world writable error issue
 		if strings.Contains(fullBuffer.String(), "VERR_SUPLIB_WORLD_WRITABLE") {
 			display.WorldWritable()
 			return util.ErrorfQuiet("[USER] %s: %s", fullBuffer.String(), err)
@@ -226,7 +228,7 @@ func (machine DockerMachine) Stop() error {
 	cmd := []string{
 		dockerMachineCmd,
 		"stop",
-		"nanobox",
+		"microbox",
 	}
 
 	process := exec.Command(cmd[0], cmd[1:]...)
@@ -263,7 +265,7 @@ func (machine DockerMachine) Destroy() error {
 		dockerMachineCmd,
 		"rm",
 		"-f",
-		"nanobox",
+		"microbox",
 	}
 
 	process := exec.Command(cmd[0], cmd[1:]...)
@@ -292,7 +294,7 @@ func (machine DockerMachine) Start() error {
 		cmd := []string{
 			dockerMachineCmd,
 			"start",
-			"nanobox",
+			"microbox",
 		}
 
 		process := exec.Command(cmd[0], cmd[1:]...)
@@ -314,7 +316,7 @@ func (machine DockerMachine) Start() error {
 		display.StopTask()
 	}
 
-	// create custom nanobox docker network
+	// create custom microbox docker network
 	if !machine.hasNetwork() {
 		config, _ := models.LoadConfig()
 		ip, ipNet, err := net.ParseCIDR(config.DockerMachineNetworkSpace)
@@ -325,7 +327,7 @@ func (machine DockerMachine) Start() error {
 		cmd := []string{
 			dockerMachineCmd,
 			"ssh",
-			"nanobox",
+			"microbox",
 			"docker",
 			"network",
 			"create",
@@ -334,7 +336,7 @@ func (machine DockerMachine) Start() error {
 			"--opt='com.docker.network.driver.mtu=1450'",
 			"--opt='com.docker.network.bridge.name=redd0'",
 			fmt.Sprintf("--gateway=%s", ip.String()),
-			"nanobox",
+			"microbox",
 		}
 
 		process := exec.Command(cmd[0], cmd[1:]...)
@@ -359,7 +361,7 @@ func (machine DockerMachine) Start() error {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"modprobe",
 		"ip_vs",
@@ -389,7 +391,7 @@ func (machine DockerMachine) Start() error {
 	cmd = []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"pkill",
 		"udhcpc",
@@ -407,7 +409,7 @@ func (machine DockerMachine) Start() error {
 	cmd = []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"curl",
 		"--connect-timeout",
 		"5",
@@ -418,7 +420,7 @@ func (machine DockerMachine) Start() error {
 	if err := process.Run(); err != nil {
 		display.ErrorTask()
 		display.VMCommunicationError()
-		return util.ErrorfQuiet("[NANOBOX] VM cannot communicate with host")
+		return util.ErrorfQuiet("[MICROBOX] VM cannot communicate with host")
 	}
 
 	if machine.changedIP() {
@@ -440,11 +442,11 @@ func (machine DockerMachine) HostMntDir() string {
 
 // DockerEnv exports the docker connection information to the running process
 func (machine DockerMachine) DockerEnv() error {
-	// docker-machine env nanobox
+	// docker-machine env microbox
 	// export DOCKER_TLS_VERIFY="1"
 	// export DOCKER_HOST="tcp://192.168.99.102:2376"
-	// export DOCKER_CERT_PATH="/Users/lyon/.docker/machine/machines/nanobox"
-	// export DOCKER_MACHINE_NAME="nanobox"
+	// export DOCKER_CERT_PATH="/Users/lyon/.docker/machine/machines/microbox"
+	// export DOCKER_MACHINE_NAME="microbox"
 
 	// create an anonymous struct that we will populate after running inspect
 	inspect := struct {
@@ -462,7 +464,7 @@ func (machine DockerMachine) DockerEnv() error {
 	}{}
 
 	// fetch the docker-machine endpoint information
-	cmd := exec.Command(dockerMachineCmd, "inspect", "nanobox")
+	cmd := exec.Command(dockerMachineCmd, "inspect", "microbox")
 	b, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("%s: %s", b, err)
@@ -480,10 +482,10 @@ func (machine DockerMachine) DockerEnv() error {
 	}
 
 	if inspect.Driver.IPAddress == "" {
-		return util.Err{Message: "docker-machine didnt start docker properly", Suggest: "run `nanobox-machine stop nanobox` and try again"}
+		return util.Err{Message: "docker-machine didnt start docker properly", Suggest: "run `microbox-machine stop microbox` and try again"}
 	}
 	// set docker environment variables for client connections
-	os.Setenv("DOCKER_MACHINE_NAME", "nanobox")
+	os.Setenv("DOCKER_MACHINE_NAME", "microbox")
 	os.Setenv("DOCKER_HOST", fmt.Sprintf("tcp://%s:2376", inspect.Driver.IPAddress))
 	os.Setenv("DOCKER_CERT_PATH", inspect.HostOptions.AuthOptions.StorePath)
 
@@ -499,7 +501,7 @@ func (machine DockerMachine) AddIP(ip string) error {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"ip",
 		"addr",
@@ -531,7 +533,7 @@ func (machine DockerMachine) RemoveIP(ip string) error {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"ip",
 		"addr",
@@ -554,7 +556,7 @@ func (machine DockerMachine) RemoveIP(ip string) error {
 
 func (dockermachine DockerMachine) SetDefaultIP(ip string) error {
 	// check to see if the route is already set as the default
-	checkOut, _ := exec.Command(dockerMachineCmd, "ssh", "nanobox", "ip", "route").CombinedOutput()
+	checkOut, _ := exec.Command(dockerMachineCmd, "ssh", "microbox", "ip", "route").CombinedOutput()
 	if strings.Contains(string(checkOut), ip) {
 		// if the output has this ip already we can return without changing anything
 		return nil
@@ -563,7 +565,7 @@ func (dockermachine DockerMachine) SetDefaultIP(ip string) error {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"ip",
 		"route",
@@ -595,7 +597,7 @@ func (machine DockerMachine) AddNat(ip, containerIP string) error {
 		cmd := []string{
 			dockerMachineCmd,
 			"ssh",
-			"nanobox",
+			"microbox",
 			"sudo",
 			"/usr/local/sbin/iptables",
 			"-t",
@@ -626,7 +628,7 @@ func (machine DockerMachine) AddNat(ip, containerIP string) error {
 		cmd := []string{
 			dockerMachineCmd,
 			"ssh",
-			"nanobox",
+			"microbox",
 			"sudo",
 			"/usr/local/sbin/iptables",
 			"-t",
@@ -663,7 +665,7 @@ func (machine DockerMachine) RemoveNat(ip, containerIP string) error {
 		cmd := []string{
 			dockerMachineCmd,
 			"ssh",
-			"nanobox",
+			"microbox",
 			"sudo",
 			"/usr/local/sbin/iptables",
 			"-t",
@@ -694,7 +696,7 @@ func (machine DockerMachine) RemoveNat(ip, containerIP string) error {
 		cmd := []string{
 			dockerMachineCmd,
 			"ssh",
-			"nanobox",
+			"microbox",
 			"sudo",
 			"/usr/local/sbin/iptables",
 			"-t",
@@ -731,7 +733,7 @@ func (machine DockerMachine) RemoveEnvDir(id string) error {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"rm",
 		"-rf",
@@ -757,7 +759,7 @@ func (machine DockerMachine) HostIP() (string, error) {
 	}{}
 
 	// fetch the docker-machine endpoint information
-	cmd := exec.Command(dockerMachineCmd, "inspect", "nanobox")
+	cmd := exec.Command(dockerMachineCmd, "inspect", "microbox")
 	b, err := cmd.CombinedOutput()
 	if err != nil {
 		return "", fmt.Errorf("%s: %s", b, err)
@@ -783,7 +785,7 @@ func (machine DockerMachine) ReservedIPs() (rtn []string) {
 func (machine DockerMachine) Run(command []string) ([]byte, error) {
 
 	// All commands need to be run in the docker machine, so we create a prefix
-	context := []string{dockerMachineCmd, "ssh", "nanobox"}
+	context := []string{dockerMachineCmd, "ssh", "microbox"}
 
 	// now we can generate a run command combining the context with the command
 	run := append(context, command...)
@@ -803,7 +805,7 @@ func (machine DockerMachine) regenerateCert() error {
 
 	display.StartTask("Regenerating Docker certs")
 
-	cmd := exec.Command(dockerMachineCmd, "regenerate-certs", "-f", "nanobox")
+	cmd := exec.Command(dockerMachineCmd, "regenerate-certs", "-f", "microbox")
 	b, err := cmd.CombinedOutput()
 	if err != nil {
 		display.ErrorTask()
@@ -816,15 +818,15 @@ func (machine DockerMachine) regenerateCert() error {
 
 // isCreated ...
 func (machine DockerMachine) isCreated() bool {
-	// docker-machine status nanobox
-	cmd := exec.Command(dockerMachineCmd, "status", "nanobox")
+	// docker-machine status microbox
+	cmd := exec.Command(dockerMachineCmd, "status", "microbox")
 	output, err := cmd.CombinedOutput()
 
 	if err != nil {
 		return false
 	}
 
-	if bytes.Contains(output, []byte("Host does not exist: \"nanobox\"")) ||
+	if bytes.Contains(output, []byte("Host does not exist: \"microbox\"")) ||
 		bytes.Contains(output, []byte("error")) {
 		return false
 	}
@@ -838,11 +840,11 @@ func (machine DockerMachine) hasNetwork() bool {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"docker",
 		"network",
 		"inspect",
-		"nanobox",
+		"microbox",
 	}
 
 	process := exec.Command(cmd[0], cmd[1:]...)
@@ -852,7 +854,7 @@ func (machine DockerMachine) hasNetwork() bool {
 		return false
 	}
 
-	if bytes.Contains(output, []byte("Error: No such network: nanobox")) {
+	if bytes.Contains(output, []byte("Error: No such network: microbox")) {
 		return false
 	}
 
@@ -862,8 +864,8 @@ func (machine DockerMachine) hasNetwork() bool {
 // IsReady ...
 func (machine DockerMachine) IsReady() bool {
 
-	// docker-machine status nanobox
-	cmd := exec.Command(dockerMachineCmd, "status", "nanobox")
+	// docker-machine status microbox
+	cmd := exec.Command(dockerMachineCmd, "status", "microbox")
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return false
@@ -883,7 +885,7 @@ func (machine DockerMachine) hasIP(ip string) bool {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"ip",
 		"addr",
 		"show",
@@ -911,7 +913,7 @@ func (machine DockerMachine) hasNatPreroute(hostIP, containerIP string) bool {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"/usr/local/sbin/iptables",
 		"-t",
@@ -946,7 +948,7 @@ func (machine DockerMachine) hasNatPostroute(hostIP, containerIP string) bool {
 	cmd := []string{
 		dockerMachineCmd,
 		"ssh",
-		"nanobox",
+		"microbox",
 		"sudo",
 		"/usr/local/sbin/iptables",
 		"-t",
@@ -1013,7 +1015,7 @@ func dockerMachineURL() string {
 		// temporarily replace the docker-machine version with a custom one until
 		// docker fixes the issues created by Sierra
 		// download = fmt.Sprintf("%s/docker-machine-Darwin-x86_64", download)
-		download = "https://s3.amazonaws.com/tools.nanobox.io/docker-machine/darwin/docker-machine"
+		download = "https://s3.amazonaws.com/tools.microbox.cloud/docker-machine/darwin/docker-machine"
 	case "linux":
 		download = fmt.Sprintf("%s/docker-machine-Linux-x86_64", download)
 	case "windows":

@@ -3,9 +3,9 @@ package code
 import (
 	"encoding/json"
 
-	"github.com/nanobox-io/nanobox-boxfile"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/dns"
+	boxfile "github.com/mu-box/microbox-boxfile"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/dns"
 )
 
 type (
@@ -71,7 +71,7 @@ func ConfigurePayload(appModel *models.App, componentModel *models.Component) st
 		StopTimeout:  boxfile.Node(componentModel.Name).Value("stop_timeout"),
 		StopForce:    boxfile.Node(componentModel.Name).Value("stop_force"),
 		CronJobs:     boxfile.Node(componentModel.Name).Value("cron"),
-		DnsEntries:   dns.List(" by nanobox"),
+		DnsEntries:   dns.List(" by microbox"),
 	}
 
 	bytes, err := json.Marshal(pload)

@@ -34,10 +34,10 @@ func launchSystem() string {
 func startCmd(name string) []string {
 	switch launchSystem() {
 	case "systemd":
-		// systemctl start nanobox-openvpn.service
+		// systemctl start microbox-openvpn.service
 		return []string{"systemctl", "start", fmt.Sprintf("%s.service", name)}
 	case "upstart":
-		// initctl start nanobox-openvpn
+		// initctl start microbox-openvpn
 		return []string{"initctl", "start", name}
 	}
 
@@ -74,10 +74,10 @@ func Running(name string) bool {
 func stopCmd(name string) []string {
 	switch launchSystem() {
 	case "systemd":
-		// systemctl start nanobox-openvpn.service
+		// systemctl start microbox-openvpn.service
 		return []string{"systemctl", "stop", fmt.Sprintf("%s.service", name)}
 	case "upstart":
-		// initctl start nanobox-openvpn
+		// initctl start microbox-openvpn
 		return []string{"initctl", "stop", name}
 	}
 

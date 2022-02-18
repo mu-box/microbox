@@ -1,13 +1,13 @@
 package processors
 
 import (
-	"github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/processors/server"
+	"github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/processors/server"
 )
 
 // Start starts the provider (VM)
 func Start() error {
-	// start the nanobox server
+	// start the microbox server
 	if err := server.Setup(); err != nil {
 		return err
 	}

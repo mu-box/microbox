@@ -3,9 +3,9 @@ package evar
 import (
 	"fmt"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 func List(envModel *models.Env, appID string) error {
@@ -18,7 +18,7 @@ func List(envModel *models.Env, appID string) error {
 		appID = remote.ID
 	}
 
-	// set odins endpoint if the arguement is passed
+	// set odins endpoint if the argument is passed
 	if endpoint := registry.GetString("endpoint"); endpoint != "" {
 		odin.SetEndpoint(endpoint)
 	}

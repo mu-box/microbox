@@ -3,17 +3,17 @@ package env
 import (
 	"path/filepath"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 // Unmount unmounts the env shares
 func Unmount(env *models.Env) error {
 
-	// break early if there is still an environemnt using the mounts
+	// break early if there is still an environment using the mounts
 	if mountsInUse(env) {
 		return nil
 	}

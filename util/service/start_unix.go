@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 package service
@@ -11,7 +12,7 @@ func Start(name string) error {
 	cmd := startCmd(name)
 	out, err := exec.Command(cmd[0], cmd[1:]...).CombinedOutput()
 	if err != nil {
-		fmt.Errorf("out: %s, err: %s", out, err)
+		return fmt.Errorf("out: %s, err: %s", out, err)
 	}
 
 	if !Running(name) {

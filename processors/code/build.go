@@ -5,16 +5,16 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
-	"github.com/nanobox-io/nanobox-boxfile"
+	docker "github.com/mu-box/golang-docker-client"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	container_generator "github.com/nanobox-io/nanobox/generators/containers"
-	hook_generator "github.com/nanobox-io/nanobox/generators/hooks/build"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/hookit"
+	container_generator "github.com/mu-box/microbox/generators/containers"
+	hook_generator "github.com/mu-box/microbox/generators/hooks/build"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/hookit"
 )
 
 // Build builds the codebase that can then be deployed
@@ -70,7 +70,7 @@ func Build(envModel *models.Env) error {
 
 	// ensure we stop the container when we're done
 	if err := docker.ContainerRemove(container_generator.BuildName()); err != nil {
-		return util.ErrorAppend(err, "unable to remove docker contianer")
+		return util.ErrorAppend(err, "unable to remove docker container")
 	}
 
 	return nil
@@ -87,7 +87,7 @@ func prepareBuildEnvironment(containerID string) error {
 		if strings.Contains(out, "argument list too long") {
 			display.TooManyKeys()
 			if err2, ok := err.(util.Err); ok {
-				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `nanobox config set ssh-key ~/.ssh/id_rsa`"
+				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `microbox config set ssh-key ~/.ssh/id_rsa`"
 				err2.Output = out
 				err2.Code = "1001"
 				return util.ErrorAppend(err2, "failed to run the (build)user hook")

@@ -1,4 +1,4 @@
-// Package commands defines the commands that nanobox can run
+// Package commands defines the commands that microbox can run
 package commands
 
 import (
@@ -10,14 +10,14 @@ import (
 	"github.com/jcelliott/lumber"
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/commands/server"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/update"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/commands/server"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/update"
 )
 
 var (
@@ -34,15 +34,15 @@ var (
 	showVersion     bool
 	endpoint        string
 
-	// NanoboxCmd ...
-	NanoboxCmd = &cobra.Command{
-		Use:   "nanobox",
+	// MicroboxCmd ...
+	MicroboxCmd = &cobra.Command{
+		Use:   "microbox",
 		Short: "",
 		Long:  ``,
 		PersistentPreRun: func(ccmd *cobra.Command, args []string) {
-			// report the command to nanobox
-			processors.SubmitLog(strings.Replace(ccmd.CommandPath(), "nanobox ", "", 1))
-			// mixpanel.Report(strings.Replace(ccmd.CommandPath(), "nanobox ", "", 1))
+			// report the command to microbox
+			processors.SubmitLog(strings.Replace(ccmd.CommandPath(), "microbox ", "", 1))
+			// mixpanel.Report(strings.Replace(ccmd.CommandPath(), "microbox ", "", 1))
 
 			registry.Set("debug", debugMode)
 
@@ -62,13 +62,18 @@ var (
 			// alert the user if an update is needed
 			update.Check()
 
+			if _, err := util.OsArchDetect(); err != nil {
+				fmt.Println(err)
+				os.Exit(126) // Command invoked cannot execute
+			}
+
 			configModel, _ := models.LoadConfig()
 
 			// TODO: look into global messaging
 			if internalCommand {
 				registry.Set("internal", internalCommand)
 				// setup a file logger, this will be replaced in verbose mode.
-				fileLogger, _ := lumber.NewAppendLogger(filepath.ToSlash(filepath.Join(config.GlobalDir(), "nanobox.log")))
+				fileLogger, _ := lumber.NewAppendLogger(filepath.ToSlash(filepath.Join(config.GlobalDir(), "microbox.log")))
 				lumber.SetLogger(fileLogger)
 
 			} else {
@@ -81,9 +86,9 @@ var (
 					!configModel.CIMode &&
 					!strings.Contains(fullCmd, "set ci") &&
 					!strings.Contains(ccmd.CommandPath(), "server") {
-					// if it is not an internal command (starting the server requires privilages)
-					// we wont run nanobox as privilage
-					display.UnexpectedPrivilage()
+					// if it is not an internal command (starting the server requires privileges)
+					// we wont run microbox as privilege
+					display.UnexpectedPrivilege()
 					os.Exit(1)
 				}
 			}
@@ -110,18 +115,18 @@ var (
 	}
 )
 
-// init creates the list of available nanobox commands and sub commands
+// init creates the list of available microbox commands and sub commands
 func init() {
 
 	// persistent flags
-	NanoboxCmd.PersistentFlags().StringVarP(&endpoint, "endpoint", "e", "", "production endpoint")
-	NanoboxCmd.PersistentFlags().MarkHidden("endpoint")
-	NanoboxCmd.PersistentFlags().BoolVarP(&internalCommand, "internal", "", false, "Skip pre-requisite checks")
-	NanoboxCmd.PersistentFlags().MarkHidden("internal")
-	NanoboxCmd.PersistentFlags().BoolVarP(&debugMode, "debug", "", false, "In the event of a failure, drop into debug context")
-	NanoboxCmd.PersistentFlags().BoolVarP(&displayDebugMode, "verbose", "v", false, "Increases display output and sets level to debug")
-	NanoboxCmd.PersistentFlags().BoolVarP(&showVersion, "version", "", false, "Print version information and exit")
-	NanoboxCmd.PersistentFlags().BoolVarP(&displayTraceMode, "trace", "t", false, "Increases display output and sets level to trace")
+	MicroboxCmd.PersistentFlags().StringVarP(&endpoint, "endpoint", "e", "", "production endpoint")
+	MicroboxCmd.PersistentFlags().MarkHidden("endpoint")
+	MicroboxCmd.PersistentFlags().BoolVarP(&internalCommand, "internal", "", false, "Skip pre-requisite checks")
+	MicroboxCmd.PersistentFlags().MarkHidden("internal")
+	MicroboxCmd.PersistentFlags().BoolVarP(&debugMode, "debug", "", false, "In the event of a failure, drop into debug context")
+	MicroboxCmd.PersistentFlags().BoolVarP(&displayDebugMode, "verbose", "v", false, "Increases display output and sets level to debug")
+	MicroboxCmd.PersistentFlags().BoolVarP(&showVersion, "version", "", false, "Print version information and exit")
+	MicroboxCmd.PersistentFlags().BoolVarP(&displayTraceMode, "trace", "t", false, "Increases display output and sets level to trace")
 
 	// log specific flags
 	LogCmd.Flags().BoolVarP(&logRaw, "raw", "r", false, "Print raw log timestamps instead")
@@ -133,31 +138,31 @@ func init() {
 	// LogCmd.Flags().StringVarP(&logLimit, "limit", "", "", "Time to limit amount of historic logs to print")
 
 	// subcommands
-	NanoboxCmd.AddCommand(ConfigureCmd)
-	NanoboxCmd.AddCommand(RunCmd)
-	NanoboxCmd.AddCommand(BuildCmd)
-	NanoboxCmd.AddCommand(CompileCmd)
-	NanoboxCmd.AddCommand(DeployCmd)
-	NanoboxCmd.AddCommand(ConsoleCmd)
-	NanoboxCmd.AddCommand(RemoteCmd)
-	NanoboxCmd.AddCommand(StatusCmd)
-	NanoboxCmd.AddCommand(LoginCmd)
-	NanoboxCmd.AddCommand(LogoutCmd)
-	NanoboxCmd.AddCommand(CleanCmd)
-	NanoboxCmd.AddCommand(InfoCmd)
-	NanoboxCmd.AddCommand(TunnelCmd)
-	NanoboxCmd.AddCommand(ImplodeCmd)
-	NanoboxCmd.AddCommand(DestroyCmd)
-	NanoboxCmd.AddCommand(StartCmd)
-	NanoboxCmd.AddCommand(StopCmd)
-	NanoboxCmd.AddCommand(UpdateCmd)
-	NanoboxCmd.AddCommand(EvarCmd)
-	NanoboxCmd.AddCommand(DnsCmd)
-	NanoboxCmd.AddCommand(LogCmd)
-	NanoboxCmd.AddCommand(VersionCmd)
-	NanoboxCmd.AddCommand(server.ServerCmd)
+	MicroboxCmd.AddCommand(ConfigureCmd)
+	MicroboxCmd.AddCommand(RunCmd)
+	MicroboxCmd.AddCommand(BuildCmd)
+	MicroboxCmd.AddCommand(CompileCmd)
+	MicroboxCmd.AddCommand(DeployCmd)
+	MicroboxCmd.AddCommand(ConsoleCmd)
+	MicroboxCmd.AddCommand(RemoteCmd)
+	MicroboxCmd.AddCommand(StatusCmd)
+	MicroboxCmd.AddCommand(LoginCmd)
+	MicroboxCmd.AddCommand(LogoutCmd)
+	MicroboxCmd.AddCommand(CleanCmd)
+	MicroboxCmd.AddCommand(InfoCmd)
+	MicroboxCmd.AddCommand(TunnelCmd)
+	MicroboxCmd.AddCommand(ImplodeCmd)
+	MicroboxCmd.AddCommand(DestroyCmd)
+	MicroboxCmd.AddCommand(StartCmd)
+	MicroboxCmd.AddCommand(StopCmd)
+	MicroboxCmd.AddCommand(UpdateCmd)
+	MicroboxCmd.AddCommand(EvarCmd)
+	MicroboxCmd.AddCommand(DnsCmd)
+	MicroboxCmd.AddCommand(LogCmd)
+	MicroboxCmd.AddCommand(VersionCmd)
+	MicroboxCmd.AddCommand(server.ServerCmd)
 
 	// hidden subcommands
-	NanoboxCmd.AddCommand(EnvCmd)
-	NanoboxCmd.AddCommand(InspectCmd)
+	MicroboxCmd.AddCommand(EnvCmd)
+	MicroboxCmd.AddCommand(InspectCmd)
 }

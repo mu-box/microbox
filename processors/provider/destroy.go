@@ -3,10 +3,10 @@ package provider
 import (
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/processors/provider/bridge"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/locker"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/processors/provider/bridge"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/locker"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 // Destroy destroys the provider

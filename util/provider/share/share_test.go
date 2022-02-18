@@ -5,10 +5,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/config"
 
-	"github.com/nanobox-io/nanobox/util/provider/share"
+	"github.com/mu-box/microbox/util/provider/share"
 )
 
 func TestMain(m *testing.M) {
@@ -88,9 +88,9 @@ func TestShare(t *testing.T) {
 // this commented version is if we pull out the recursive boxfile search from localDir()
 // // TestShare tests adding parent first, so we can test if removal of parent removes child/sub path
 // func TestShare(t *testing.T) {
-// 	// path = /go/src/github.com/nanobox-io/nanobox/util/provider/share
+// 	// path = /go/src/github.com/mu-box/microbox/util/provider/share
 // 	path := config.LocalDir()
-// 	// parentPath = /go/src/github.com/nanobox-io/nanobox/util/provider
+// 	// parentPath = /go/src/github.com/mu-box/microbox/util/provider
 // 	parentPath := filepath.Dir(path)
 // 	if share.Exists(parentPath) {
 // 		t.Fatal("parent appears to exist when it shouldnt")

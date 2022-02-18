@@ -3,9 +3,9 @@ package commands
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -13,9 +13,9 @@ var (
 	// StopCmd ...
 	StopCmd = &cobra.Command{
 		Use:   "stop",
-		Short: "Stop the Nanobox virtual machine.",
+		Short: "Stop the Microbox virtual machine.",
 		Long: `
-Stops the Nanobox virtual machine as well as
+Stops the Microbox virtual machine as well as
 any running local or dry-run environments.
 		`,
 		Run: stopFn,

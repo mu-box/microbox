@@ -1,7 +1,7 @@
 package bridge
 
 import (
-	"github.com/nanobox-io/nanobox/commands/server"
+	"github.com/mu-box/microbox/commands/server"
 )
 
 func Stop() error {

@@ -6,10 +6,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -17,10 +17,10 @@ var (
 	// ConfigureCmd ...
 	ConfigureCmd = &cobra.Command{
 		Use:   "configure",
-		Short: "Configure Nanobox.",
+		Short: "Configure Microbox.",
 		Long: `
 Walks through a series of question prompts that modify your local
-Nanobox configuration (~/.nanobox/config.yml).
+Microbox configuration (~/.microbox/config.yml).
 		`,
 		Run:     configureFn,
 		Aliases: []string{"config"},

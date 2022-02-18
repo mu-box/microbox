@@ -1,4 +1,4 @@
-// Package update handles the updating of nanobox cli
+// Package update handles the updating of microbox cli
 package update
 
 import (
@@ -10,15 +10,15 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 func remotePath() string {
-	return fmt.Sprintf("https://s3.amazonaws.com/tools.nanobox.io/nanobox/v2/%s/%s/%s", runtime.GOOS, runtime.GOARCH, Name)
+	return fmt.Sprintf("https://s3.amazonaws.com/tools.microbox.cloud/microbox/v2/%s/%s/%s", runtime.GOOS, runtime.GOARCH, Name)
 }
 
 func latestVersion() string {
-	remotePath := "https://s3.amazonaws.com/tools.nanobox.io/nanobox/v2/version"
+	remotePath := "https://s3.amazonaws.com/tools.microbox.cloud/microbox/v2/version"
 	res, err := http.Get(remotePath)
 	if err != nil {
 		lumber.Error("update:http.Get(%s): %s", remotePath, err)

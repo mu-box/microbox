@@ -1,6 +1,6 @@
 package helpers
 
-import "github.com/nanobox-io/nanobox/models"
+import "github.com/mu-box/microbox/models"
 
 func Endpoint(envModel *models.Env, args []string, maxArgs int) ([]string, string, string) {
 	if len(args) == 0 {

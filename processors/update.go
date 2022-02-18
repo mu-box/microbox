@@ -1,4 +1,4 @@
-// This update processor updates the images on nanobox local
+// This update processor updates the images on microbox local
 
 package processors
 
@@ -7,11 +7,11 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	process_provider "github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
+	process_provider "github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
 )
 
 func Update() error {
@@ -21,7 +21,7 @@ func Update() error {
 		return util.ErrorAppend(err, "failed to init docker client")
 	}
 
-	// update all the nanobox images
+	// update all the microbox images
 	if err := pullImages(); err != nil {
 		return util.ErrorAppend(err, "failed to pull images")
 	}
@@ -42,7 +42,7 @@ func pullImages() error {
 		if image.Slug == "" {
 			continue
 		}
-		if !strings.Contains(image.Slug, "nanobox/") {
+		if !strings.Contains(image.Slug, "mubox/") {
 			continue
 		}
 		display.StartTask("Pulling %s image", image.Slug)

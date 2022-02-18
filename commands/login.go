@@ -3,10 +3,10 @@ package commands
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -14,11 +14,11 @@ var (
 	// LoginCmd ...
 	LoginCmd = &cobra.Command{
 		Use:   "login",
-		Short: "Authenticate your nanobox client with your nanobox.io account.",
+		Short: "Authenticate your microbox client with your microbox.cloud account.",
 		Long: `
-Authenticate with your nanobox account by passing the username and password in or using the following environment variables:
-NANOBOX_USERNAME
-NANOBOX_PASSWORD
+Authenticate with your microbox account by passing the username and password in or using the following environment variables:
+MICROBOX_USERNAME
+MICROBOX_PASSWORD
 `,
 		Run: loginFn,
 	}

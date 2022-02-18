@@ -3,14 +3,13 @@ package processors
 import (
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/app"
-	"github.com/nanobox-io/nanobox/processors/env"
-	"github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/processors/server"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	util_provider "github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/app"
+	"github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/processors/server"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	util_provider "github.com/mu-box/microbox/util/provider"
 )
 
 // Stop stops the running apps, unmounts all envs, and stops the provider
@@ -77,28 +76,28 @@ func stopAllApps() error {
 }
 
 // unmountEnvs unmounts all of the environments
-func unmountEnvs() error {
-	// unmount all the environments so stoping doesnt take forever
-
-	envs, err := models.AllEnvs()
-	if err != nil {
-		display.ErrorTask()
-		return util.ErrorAppend(err, "failed to load all envs")
-	}
-
-	if len(envs) == 0 {
-		return nil
-	}
-
-	display.OpenContext("Removing mounts")
-	defer display.CloseContext()
-
-	for _, e := range envs {
-		if err := env.Unmount(e); err != nil {
-			display.ErrorTask()
-			return util.ErrorAppend(err, "failed to unmount env")
-		}
-	}
-
-	return nil
-}
+// func unmountEnvs() error {
+// 	// unmount all the environments so stoping doesnt take forever
+//
+// 	envs, err := models.AllEnvs()
+// 	if err != nil {
+// 		display.ErrorTask()
+// 		return util.ErrorAppend(err, "failed to load all envs")
+// 	}
+//
+// 	if len(envs) == 0 {
+// 		return nil
+// 	}
+//
+// 	display.OpenContext("Removing mounts")
+// 	defer display.CloseContext()
+//
+// 	for _, e := range envs {
+// 		if err := env.Unmount(e); err != nil {
+// 			display.ErrorTask()
+// 			return util.ErrorAppend(err, "failed to unmount env")
+// 		}
+// 	}
+//
+// 	return nil
+// }

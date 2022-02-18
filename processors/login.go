@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 // Process ...
 func Login(username, password, endpoint string) error {
 
 	// request Username/Password if missing
-	if username == "" && os.Getenv("NANOBOX_USERNAME") != "" {
-		username = os.Getenv("NANOBOX_USERNAME")
+	if username == "" && os.Getenv("MICROBOX_USERNAME") != "" {
+		username = os.Getenv("MICROBOX_USERNAME")
 	}
 
 	if username == "" {
@@ -26,25 +26,25 @@ func Login(username, password, endpoint string) error {
 		username = user
 	}
 
-	if password == "" && os.Getenv("NANOBOX_PASSWORD") != "" {
-		password = os.Getenv("NANOBOX_PASSWORD")
+	if password == "" && os.Getenv("MICROBOX_PASSWORD") != "" {
+		password = os.Getenv("MICROBOX_PASSWORD")
 	}
 
 	if password == "" {
 		// ReadPassword prints Password: already
-		pass, err := display.ReadPassword("Nanobox")
+		pass, err := display.ReadPassword("Microbox")
 		if err != nil {
 			return util.ErrorAppend(err, "failed to read password")
 		}
 		password = pass
 	}
 
-	if endpoint == "" && os.Getenv("NANOBOX_ENDPOINT") != "" {
-		endpoint = os.Getenv("NANOBOX_ENDPOINT")
+	if endpoint == "" && os.Getenv("MICROBOX_ENDPOINT") != "" {
+		endpoint = os.Getenv("MICROBOX_ENDPOINT")
 	}
 
 	if endpoint == "" {
-		endpoint = "nanobox"
+		endpoint = "microbox"
 	}
 
 	// set the odin endpoint
@@ -53,8 +53,8 @@ func Login(username, password, endpoint string) error {
 	// verify that the user exists
 	token, err := odin.Auth(username, password)
 	if err != nil {
-		fmt.Println(`! The username/password was incorrect, but we're continuing on.
-  To reattempt authentication, run 'nanobox login'.
+		fmt.Print(`! The username/password was incorrect, but we're continuing on.
+  To reattempt authentication, run 'microbox login'.
 `)
 		return nil
 	}

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nanobox-io/golang-portal-client"
-	"github.com/nanobox-io/nanobox-boxfile"
+	portal "github.com/mu-box/golang-portal-client"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 func BuildRoutes(appModel *models.App) []portal.Route {

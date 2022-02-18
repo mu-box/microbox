@@ -4,12 +4,12 @@ import (
 	"net"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/dhcp"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/dhcp"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // Destroy destroys a component from the provider and database

@@ -6,9 +6,9 @@ import (
 	"net"
 	"sync"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/locker"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/locker"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 var (
@@ -46,7 +46,7 @@ func ReserveGlobal() (net.IP, error) {
 		return nil, err
 	}
 
-	// dump the first ip becuase it is the gateway
+	// dump the first ip because it is the gateway
 	ip := ipSpace.GlobalIP
 	inc(ip)
 
@@ -119,7 +119,7 @@ func ReserveLocal() (net.IP, error) {
 	switch config.Provider {
 	case "docker-machine":
 
-		// dump the first ip becuase it is the gateway
+		// dump the first ip because it is the gateway
 		ip := ipSpace.LocalIP
 		inc(ip)
 
@@ -136,7 +136,7 @@ func ReserveLocal() (net.IP, error) {
 
 	case "native":
 
-		// dump the first ip becuase it is the gateway
+		// dump the first ip because it is the gateway
 		ip := ipSpace.NativeIP
 		inc(ip)
 

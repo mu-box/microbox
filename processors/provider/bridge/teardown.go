@@ -2,10 +2,10 @@ package bridge
 
 import (
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	container_generator "github.com/nanobox-io/nanobox/generators/containers"
-	"github.com/nanobox-io/nanobox/util"
+	container_generator "github.com/mu-box/microbox/generators/containers"
+	"github.com/mu-box/microbox/util"
 )
 
 func Teardown() error {

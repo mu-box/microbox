@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/nanobox-io/nanobox-boxfile"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/util/fileutil"
+	"github.com/mu-box/microbox/util/fileutil"
 )
 
 // AppName ...
@@ -36,21 +36,21 @@ func EnvID() string {
 	return fmt.Sprintf("%x", md5.Sum([]byte(LocalDir())))
 }
 
-// NanoboxPath ...
-func NanoboxPath() string {
+// MicroboxPath ...
+func MicroboxPath() string {
 
 	programName, err := os.Executable()
 	if err == nil {
 		return programName
 	}
 
-	// lookup the full path to nanobox
+	// lookup the full path to microbox
 	path, err := exec.LookPath(os.Args[0])
 	if err == nil {
 		return path
 	}
 
-	// if args[0] was a path to nanobox already
+	// if args[0] was a path to microbox already
 	if fileutil.Exists(programName) {
 		return programName
 	}
@@ -61,9 +61,9 @@ func NanoboxPath() string {
 
 // the path where the vpn is located
 func VpnPath() string {
-	bridgeClient := "nanobox-vpn"
+	bridgeClient := "microbox-vpn"
 
-	// lookup the full path to nanobox
+	// lookup the full path to microbox
 	path, err := exec.LookPath(bridgeClient)
 	if err == nil {
 		return path

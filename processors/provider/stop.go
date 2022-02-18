@@ -3,11 +3,11 @@ package provider
 import (
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/processors/provider/bridge"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/locker"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/processors/provider/bridge"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/locker"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 // Stop stops the provider (stops the VM)
@@ -15,7 +15,7 @@ func Stop() error {
 	locker.GlobalLock()
 	defer locker.GlobalUnlock()
 
-	display.OpenContext("Stopping Nanobox")
+	display.OpenContext("Stopping Microbox")
 	defer display.CloseContext()
 
 	// stop the vpn

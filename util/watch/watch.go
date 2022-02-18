@@ -9,11 +9,11 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/nanobox-boxfile"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
 )
 
 var ignoreFile = []string{".git", ".hg", ".svn", ".bzr"}
@@ -27,7 +27,7 @@ var ctimeAvailable bool
 // useful watching mechanism that looks at files and gets a hash of the content
 // then when
 
-// watch a directory and report changes to nanobox
+// watch a directory and report changes to microbox
 func Watch(container, path string) error {
 	populateIgnore(path)
 	// ctimeCheck(container) // see comment in batchPublish()
@@ -38,13 +38,13 @@ func Watch(container, path string) error {
 	watcher, err := newRecursiveWatcher("./")
 	if err != nil {
 		// if it fails display a message and try the slow one
-		lumber.Info("Error occured in fast notify watcher: %s", err.Error())
+		lumber.Info("Error occurred in fast notify watcher: %s", err.Error())
 
 		// print the warning
 		// we added /r because this message often appears in a raw terminal which requires
 		// carriage returns
 		fmt.Printf("\n\r---------------------------------------------------------------------\n\r\n\r")
-		fmt.Printf("An error occured in the fast notify watcher: '%s'\n\r\n\r", err.Error())
+		fmt.Printf("An error occurred in the fast notify watcher: '%s'\n\r\n\r", err.Error())
 		fmt.Printf("Generally, having too low of a ulimit causes these issues.\n\r")
 		fmt.Printf("Consider upping your ulimit to resolve (`ulimit -n 2048`).\n\r")
 		fmt.Printf("Until then, we'll go ahead and rollover to a slower polling solution.\n\r")
@@ -86,7 +86,7 @@ func uniq(list []string) []string {
 	for i := range list {
 		tmp[list[i]] = struct{}{}
 	}
-	for k, _ := range tmp {
+	for k := range tmp {
 		newlist = append(newlist, k)
 	}
 	return newlist
@@ -145,17 +145,15 @@ func ctime(container string, changeList []string) {
 	util.DockerExec(container, "root", "ctime", changeList, nil)
 }
 
-// populate the ignore file from the nanoignore
+// populate the ignore file from the microignore
 func populateIgnore(path string) {
 	// add pieces from the env
-	env, err := models.FindEnvByID(config.EnvID())
+	env, _ := models.FindEnvByID(config.EnvID())
 	box := boxfile.New([]byte(env.BuiltBoxfile))
-	for _, libDir := range box.Node("run.config").StringSliceValue("cache_dirs") {
-		ignoreFile = append(ignoreFile, libDir)
-	}
+	ignoreFile = append(ignoreFile, box.Node("run.config").StringSliceValue("cache_dirs")...)
 
-	// add parts from the nanoignore
-	b, err := ioutil.ReadFile(filepath.ToSlash(filepath.Join(path, ".nanoignore")))
+	// add parts from the microignore
+	b, err := ioutil.ReadFile(filepath.ToSlash(filepath.Join(path, ".microignore")))
 	if err != nil {
 		return
 	}

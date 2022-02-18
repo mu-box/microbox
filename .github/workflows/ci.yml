@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run the checks
+        uses: danhunsaker/golang-github-actions@main
+        with:
+          run: misspell,fmt,vet,cyclo,imports,ineffassign,errcheck,sec,shadow,staticcheck
+          ignore-defer: true
+          flags: '{"sec": "-exclude=G104"}'
+          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          PATH: '/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.17'
+
+      - name: Setup dependencies
+        run: |
+          go get -t ./...
+
+      - name: Run the tests
+        run: go test -v ./...
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name != 'pull_request'
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+
+        # the default image for act doesn't include this tool, but the actual GHA environment does...
+      - name: (LOCAL ONLY) Install AWS CLI
+        if: github.actor == 'nektos/act'
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip -q awscliv2.zip
+          sudo ./aws/install
+
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.17'
+
+      - name: Setup dependencies
+        run: |
+          go install github.com/mitchellh/gox@latest
+          go get -t ./...
+
+      - name: Build
+        run: |
+          ./scripts/build.sh
+
+      - name: Configure AWS credentials for publication
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/s3-write
+          role-duration-seconds: 1200
+          aws-region: us-east-1
+
+      - name: Publish
+        run: |
+          ./scripts/upload.sh

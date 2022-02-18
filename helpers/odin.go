@@ -6,8 +6,8 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 // Validates an app exists and is accessible on odin
@@ -32,7 +32,7 @@ func ValidateOdinApp(slug string) error {
 
 		// All other scenarios
 		fmt.Printf("\n%s\n\n", err.Error())
-		return util.ErrorAppend(err, "Failed to communicate with nanobox")
+		return util.ErrorAppend(err, "Failed to communicate with microbox")
 	}
 
 	return nil

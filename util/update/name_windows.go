@@ -1,4 +1,4 @@
 package update
 
-var Name = "nanobox.exe"
-var TmpName = "nanobox-tmp.exe"
+var Name = "microbox.exe"
+var TmpName = "microbox-tmp.exe"

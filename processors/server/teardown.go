@@ -5,16 +5,16 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/service"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/service"
 )
 
 func Teardown() error {
 	// run as admin
 	if !util.IsPrivileged() {
-		return reExecPrivilageRemove()
+		return reExecPrivilegeRemove()
 	}
 
 	// make sure its stopped first
@@ -22,20 +22,20 @@ func Teardown() error {
 		return err
 	}
 
-	return service.Remove("nanobox-server")
+	return service.Remove("microbox-server")
 }
 
-// reExecPrivilageRemove re-execs the current process with a privileged user
-func reExecPrivilageRemove() error {
+// reExecPrivilegeRemove re-execs the current process with a privileged user
+func reExecPrivilegeRemove() error {
 	display.PauseTask()
 	defer display.ResumeTask()
 
 	display.PrintRequiresPrivilege("to remove the server")
 
-	cmd := fmt.Sprintf("\"%s\" env server teardown", config.NanoboxPath())
+	cmd := fmt.Sprintf("\"%s\" env server teardown", config.MicroboxPath())
 
 	if err := util.PrivilegeExec(cmd); err != nil {
-		lumber.Error("server:reExecPrivilageRemove:util.PrivilegeExec(%s): %s", cmd, err)
+		lumber.Error("server:reExecPrivilegeRemove:util.PrivilegeExec(%s): %s", cmd, err)
 		return err
 	}
 

@@ -4,15 +4,15 @@ import (
 	"strings"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	container_generator "github.com/nanobox-io/nanobox/generators/containers"
-	"github.com/nanobox-io/nanobox/generators/hooks/build"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/hookit"
+	container_generator "github.com/mu-box/microbox/generators/containers"
+	"github.com/mu-box/microbox/generators/hooks/build"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/hookit"
 )
 
 // Publish ...
@@ -63,11 +63,11 @@ func Publish(envModel *models.Env, WarehouseConfig WarehouseConfig) error {
 		lumber.Error("code:Publish:build.UserPayload()")
 		return util.ErrorAppend(err, "unable to retrieve user payload")
 	}
-	if out, err := hookit.DebugExec(container.ID, "user", payload, "info"); err != nil {
+	if out, err1 := hookit.DebugExec(container.ID, "user", payload, "info"); err1 != nil {
 		// handle 'exec failed: argument list too long' error
 		if strings.Contains(out, "argument list too long") {
-			if err2, ok := err.(util.Err); ok {
-				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `nanobox config set ssh-key ~/.ssh/id_rsa`"
+			if err2, ok := err1.(util.Err); ok {
+				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `microbox config set ssh-key ~/.ssh/id_rsa`"
 				err2.Output = out
 				err2.Code = "1001"
 				return util.ErrorAppend(err2, "failed to run the (publish)user hook")
@@ -89,12 +89,12 @@ func Publish(envModel *models.Env, WarehouseConfig WarehouseConfig) error {
 		display.ErrorTask()
 		return util.ErrorAppend(err, "unable to retrieve user payload")
 	}
-	if out, err := hookit.DebugExec(container.ID, "publish", payload, "info"); err != nil {
-		if err2, ok := err.(util.Err); ok {
+	if out, err1 := hookit.DebugExec(container.ID, "publish", payload, "info"); err1 != nil {
+		if err2, ok := err1.(util.Err); ok {
 			err2.Output = out
 			return util.ErrorAppend(err2, "failed to run the (publish)publish hook")
 		}
-		return util.ErrorAppend(err, "failed to run the (publish)publish hook")
+		return util.ErrorAppend(err1, "failed to run the (publish)publish hook")
 	}
 
 	display.StopTask()

@@ -3,13 +3,13 @@ package processors
 import (
 	"fmt"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/nanoagent"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/microagent"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 func Tunnel(envModel *models.Env, tunnelConfig models.TunnelConfig) error {
@@ -27,7 +27,7 @@ func Tunnel(envModel *models.Env, tunnelConfig models.TunnelConfig) error {
 		tunnelConfig.AppName = config.AppName()
 	}
 
-	// set odins endpoint if the arguement is passed
+	// set odins endpoint if the argument is passed
 	if endpoint := registry.GetString("endpoint"); endpoint != "" {
 		odin.SetEndpoint(endpoint)
 	}
@@ -49,7 +49,7 @@ func Tunnel(envModel *models.Env, tunnelConfig models.TunnelConfig) error {
 	}
 
 	// connect up to the session
-	if err := nanoagent.Tunnel(tunInfo.Token, tunInfo.URL, fmt.Sprint(tunnelConfig.ListenPort), tunnelConfig.Component); err != nil {
+	if err := microagent.Tunnel(tunInfo.Token, tunInfo.URL, fmt.Sprint(tunnelConfig.ListenPort), tunnelConfig.Component); err != nil {
 		return util.ErrorAppend(err, "failed to connect to remote tunnel session")
 	}
 

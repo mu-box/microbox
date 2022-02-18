@@ -1,9 +1,9 @@
 package platform
 
 import (
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/component"
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/component"
+	"github.com/mu-box/microbox/util"
 )
 
 // provisionComponent will provision an individual component

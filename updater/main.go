@@ -7,12 +7,12 @@ import (
 	"os/exec"
 	"runtime"
 
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/service"
-	"github.com/nanobox-io/nanobox/util/update"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/service"
+	"github.com/mu-box/microbox/util/update"
 )
 
-// nanobox-update's version
+// microbox-update's version
 var VERSION = "0.8.0" // todo: maybe we'll ldflag populate this too
 
 // main ...
@@ -20,15 +20,15 @@ func main() {
 	path := ""
 	var err error
 
-	// this will write a new binary at location provided `nanobox-update newbinary`
+	// this will write a new binary at location provided `microbox-update newbinary`
 	if len(os.Args) > 1 {
 		if os.Args[1] == "version" {
-			fmt.Printf("nanobox-update %s\n", VERSION)
+			fmt.Printf("microbox-update %s\n", VERSION)
 			return
 		}
 		path = os.Args[1]
 	} else {
-		// get the location of the current nanobox
+		// get the location of the current microbox
 		path, err = exec.LookPath(update.Name)
 		if err != nil {
 			fmt.Printf("Cannot find %s: %s\n", update.Name, err)
@@ -53,14 +53,14 @@ func main() {
 		}
 
 		// todo: make sure removing this doesn't break things
-		// // make sure the .nanobox folder is created by our user
+		// // make sure the .microbox folder is created by our user
 		// models.LoadUpdate()
 
 		// determine the full path to the executable in case
 		// it isn't in the path when run with sudo
 		cmdPath, err := os.Executable()
 		if err != nil {
-			fmt.Printf("Cannot find the path for nanobox-update\n")
+			fmt.Printf("Cannot find the path for microbox-update\n")
 			os.Exit(1)
 		}
 		cmd := fmt.Sprintf("%s \"%s\"", cmdPath, path)
@@ -72,13 +72,13 @@ func main() {
 		return
 	}
 
-	// stop the nanobox service so we can replace the nanobox binary
-	service.Stop("nanobox-server")
+	// stop the microbox service so we can replace the microbox binary
+	service.Stop("microbox-server")
 
 	// run the update
 	err = update.Run(path)
 	if err != nil {
-		fmt.Println("error: %s", err)
+		fmt.Printf("error: %s\n", err)
 	}
 
 	if runtime.GOOS == "windows" {

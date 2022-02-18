@@ -9,7 +9,7 @@ import (
 
 // get the username
 func ReadUsername() (string, error) {
-	return Ask("Nanobox Username")
+	return Ask("Microbox Username")
 }
 
 func Ask(question string) (string, error) {

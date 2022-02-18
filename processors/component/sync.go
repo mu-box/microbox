@@ -2,11 +2,11 @@ package component
 
 import (
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/nanobox-boxfile"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // Sync syncronizes an app's components with the boxfile config

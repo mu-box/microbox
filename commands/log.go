@@ -5,13 +5,13 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/log"
-	"github.com/nanobox-io/nanobox/processors/platform"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/log"
+	"github.com/mu-box/microbox/processors/platform"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -26,7 +26,7 @@ var (
 	LogCmd = &cobra.Command{
 		Use:   "log [dry-run|remote-alias]",
 		Short: "Streams application logs.",
-		Long:  "'remote-alias' is the alias for your app, given on `nanobox remote add app-name alias`",
+		Long:  "'remote-alias' is the alias for your app, given on `microbox remote add app-name alias`",
 		Run:   logFn,
 	}
 )
@@ -44,7 +44,7 @@ func logFn(ccmd *cobra.Command, args []string) {
 			fmt.Printf(`
 --------------------------------------------------------
 Watching 'local' not yet implemented. You can watch your
-logs inside a terminal running 'nanobox run'.
+logs inside a terminal running 'microbox run'.
 --------------------------------------------------------
 
 `)

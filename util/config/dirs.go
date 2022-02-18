@@ -13,7 +13,7 @@ import (
 	"github.com/jcelliott/lumber"
 	"github.com/mitchellh/go-homedir"
 
-	"github.com/nanobox-io/nanobox-boxfile"
+	boxfile "github.com/mu-box/microbox-boxfile"
 )
 
 // GlobalDir ...
@@ -25,7 +25,7 @@ func GlobalDir() string {
 		return ""
 	}
 
-	globalDir := filepath.ToSlash(filepath.Join(p, ".nanobox"))
+	globalDir := filepath.ToSlash(filepath.Join(p, ".microbox"))
 	os.MkdirAll(globalDir, 0755)
 
 	return globalDir
@@ -47,10 +47,9 @@ func LocalDir() string {
 			if err != nil {
 				fmt.Printf("Failed to os.getwd - %s\n", err.Error())
 				return ""
-			} else {
-				return cwd
 			}
-			return ""
+
+			return cwd
 		}
 	} else {
 		cwd, err = os.Getwd()
@@ -142,14 +141,14 @@ func EngineDir() (string, error) {
 	return "", nil
 }
 
-// BinDir creates a directory where nanobox specific binaries can be downloaded
+// BinDir creates a directory where microbox specific binaries can be downloaded
 // docker, dockermachine, etc
 func BinDir() string {
 	// todo: maybe replace with `os.Executable()`
 	path, err := exec.LookPath(os.Args[0])
 	if err != nil {
 		if runtime.GOOS == "windows" {
-			return "C:\\Program Files\\Nanobox"
+			return "C:\\Program Files\\Microbox"
 
 		}
 		return filepath.Dir(os.Args[0])

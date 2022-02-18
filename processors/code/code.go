@@ -5,12 +5,12 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
-	"github.com/nanobox-io/nanobox-boxfile"
+	docker "github.com/mu-box/golang-docker-client"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // these constants represent different potential names a service can have
@@ -62,7 +62,7 @@ func buildImage() string {
 
 	// then let's set the default if the user hasn't specified
 	if image == "" {
-		image = "nanobox/build"
+		image = "mubox/build"
 	}
 
 	return image

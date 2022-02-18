@@ -1,17 +1,17 @@
 package app
 
 import (
-	"github.com/nanobox-io/nanobox-boxfile"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	generator "github.com/nanobox-io/nanobox/generators/hooks/code"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/code"
-	"github.com/nanobox-io/nanobox/processors/component"
-	"github.com/nanobox-io/nanobox/processors/platform"
-	"github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/hookit"
+	generator "github.com/mu-box/microbox/generators/hooks/code"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/code"
+	"github.com/mu-box/microbox/processors/component"
+	"github.com/mu-box/microbox/processors/platform"
+	"github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/hookit"
 )
 
 // Deploy ...
@@ -78,7 +78,7 @@ func finalizeDeploy(appModel *models.App) error {
 	}
 	display.StopTask()
 
-	// update nanoagent portal
+	// update microagent portal
 	display.StartTask("Updating router")
 	if err := platform.UpdatePortal(appModel); err != nil {
 		display.ErrorTask()

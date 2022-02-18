@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/nanobox-io/nanobox/commands/server"
+	"github.com/mu-box/microbox/commands/server"
 )
 
 type DomainName struct {
@@ -38,7 +38,7 @@ func init() {
 
 // Entry generate the DNS entry to be added
 func Entry(ip, name, env string) string {
-	return fmt.Sprintf("%s     %s # dns added for '%s' by nanobox", ip, name, env)
+	return fmt.Sprintf("%s     %s # dns added for '%s' by microbox", ip, name, env)
 }
 
 // Exists ...
@@ -139,7 +139,7 @@ func Remove(entry string) error {
 
 	err := server.ClientRun("DomainRPC.Remove", req, resp)
 	if !resp.Success {
-		err = fmt.Errorf("failed to remove domain: %v %v", err, resp.Message)
+		return fmt.Errorf("failed to remove domain: %v %v", err, resp.Message)
 	}
 	return nil
 }
@@ -191,13 +191,13 @@ func (drpc *DomainRPC) Remove(req Request, resp *Response) error {
 
 }
 
-// RemoveAll removes all dns entries added by nanobox
+// RemoveAll removes all dns entries added by microbox
 func RemoveAll() error {
 
-	// short-circuit if no entries were added by nanobox
-	if len(List("by nanobox")) == 0 {
+	// short-circuit if no entries were added by microbox
+	if len(List("by microbox")) == 0 {
 		return nil
 	}
 
-	return Remove("by nanobox")
+	return Remove("by microbox")
 }

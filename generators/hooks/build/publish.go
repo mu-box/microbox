@@ -3,7 +3,7 @@ package build
 import (
 	"encoding/json"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 type WarehouseConfig struct {

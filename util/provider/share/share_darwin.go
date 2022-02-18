@@ -11,9 +11,9 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/commands/server"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/commands/server"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
 )
 
 type Request struct {
@@ -120,7 +120,7 @@ func (sh *ShareRPC) Add(req Request, resp *Response) error {
 		}
 	}
 
-	// if this is the first time nanobox adds to the exports (single line)
+	// if this is the first time microbox adds to the exports (single line)
 	if !found {
 		lines = append(lines, fmt.Sprintf("\"%s\" %s", req.Path, lineCheck))
 	}

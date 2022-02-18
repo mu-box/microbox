@@ -121,7 +121,7 @@ func DevRunEmpty() {
 ! You don't have any web or worker start commands specified in your
   boxfile.yml. More information about start commands is available here:
 
-  https://docs.nanobox.io/boxfile/web/#start-command
+  https://docs.microbox.cloud/boxfile/web/#start-command
 
 `))
 }
@@ -152,7 +152,7 @@ func ProviderSetup() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
 + HEADS UP:
-+ Nanobox will run a single VM transparently within VirtualBox.
++ Microbox will run a single VM transparently within VirtualBox.
 + All apps and containers will be launched within the same VM.
 --------------------------------------------------------------------------------
 
@@ -163,10 +163,10 @@ func MigrateOldRequired() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
 + WARNING:
-+ Nanobox has been successfully upgraded! This change constitutes a major
++ Microbox has been successfully upgraded! This change constitutes a major
 + architectural refactor as well as data re-structure. To use this version we
-+ need to purge your current apps. No worries, nanobox will re-build them for
-+ you the next time you use "nanobox run".
++ need to purge your current apps. No worries, microbox will re-build them for
++ you the next time you use "microbox run".
 --------------------------------------------------------------------------------
 `))
 
@@ -178,7 +178,7 @@ func MigrateProviderRequired() {
 + WARNING:
 + It looks like you want to use a different provider, cool! Just FYI, we have
 + to bring down your existing apps as providers are not compatible. No worries,
-+ nanobox will re-build them for you the next time you use "nanobox run".
++ microbox will re-build them for you the next time you use "microbox run".
 --------------------------------------------------------------------------------
 `))
 }
@@ -186,16 +186,16 @@ func MigrateProviderRequired() {
 func BadTerminal() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
-This console is currently not supported by nanobox
+This console is currently not supported by microbox
 Please refer to the docs for more information
 --------------------------------------------------------------------------------
 `))
 }
 
 func MissingDependencies(provider string, missingParts []string) {
-	fmt.Printf("Using nanobox with %s requires tools that appear to not be available on your system.\n", provider)
+	fmt.Printf("Using microbox with %s requires tools that appear to not be available on your system.\n", provider)
 	fmt.Println(strings.Join(missingParts, "\n"))
-	fmt.Println("View these requirements at docs.nanobox.io/install")
+	fmt.Println("View these requirements at docs.microbox.cloud/install")
 }
 
 func DeployComplete() {
@@ -214,30 +214,30 @@ func LoginComplete() {
 
 func NetworkCreateError(name, network string) {
 	os.Stderr.WriteString(fmt.Sprintf(`
-Nanobox is trying to create a native docker network, and it
+Microbox is trying to create a native docker network, and it
 looks like we have a conflict. An existing docker network is
 already using the %s address space.
 
 You will need to either remove the conflicting network, or set
 an alternative address space with the following:
 
-nanobox config set %s <unused ip/cidr>
+microbox config set %s <unused ip/cidr>
 `, network, name))
 }
 
 func VMCommunicationError() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
-Nanobox has started a VM that needs access to your machine for mounting.
+Microbox has started a VM that needs access to your machine for mounting.
 This VM is unable to communicate with the host machine currently. Please
 verify that you don't have a firewall blocking this connection, and try again!
 --------------------------------------------------------------------------------
 `))
 }
 
-func NoGonanaUser() {
+func NoGomicroUser() {
 	os.Stderr.WriteString(fmt.Sprintf(`
-We could not connect as the gonano user but we were able to
+%s We could not connect as the gomicro user but we were able to
 fall back to the default user
 `, TaskComplete))
 }
@@ -246,10 +246,10 @@ func MissingBoxfile() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
 MISSING BOXFILE.YML
-Nanobox is looking for a boxfile.yml config file. You might want to
+Microbox is looking for a boxfile.yml config file. You might want to
 check out our getting-started guide on configuring your app:
 
-https://guides.nanobox.io/
+https://guides.microbox.cloud/
 --------------------------------------------------------------------------------
 `))
 }
@@ -258,7 +258,7 @@ func InvalidBoxfile() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
 INVALID BOXFILE.YML
-Nanobox requires valid yaml in your boxfile.yml config file. Please paste the
+Microbox requires valid yaml in your boxfile.yml config file. Please paste the
 contents of your boxfile into www.yamllint.com to validate.
 --------------------------------------------------------------------------------
 `))
@@ -268,11 +268,11 @@ func TooManyKeys() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
 POSSIBLY TOO MANY KEYS
-Nanobox imports your ssh key directory for fetching dependencies but it appears
+Microbox imports your ssh key directory for fetching dependencies but it appears
 you may have more than we can handle. You might want to check out our docs on
 specifying a key to use:
 
-https://docs.nanobox.io/local-config/configure-nanobox/
+https://docs.microbox.cloud/local-config/configure-microbox/
 --------------------------------------------------------------------------------
 `))
 }
@@ -281,7 +281,7 @@ func WorldWritable() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
 Virtualbox was unable to create the virtual machine because a folder in the path
-is globaly accessable and it should be private.
+is globally accessible and it should be private.
 --------------------------------------------------------------------------------
 `))
 
@@ -289,17 +289,17 @@ is globaly accessable and it should be private.
 
 func LoginRequired() {
 	os.Stderr.WriteString(fmt.Sprintf(`
-It appears you are running Nanobox for the first time.
-Login to your Nanobox account:
+It appears you are running Microbox for the first time.
+Login to your Microbox account:
 `))
 }
 
-func UnexpectedPrivilage() {
+func UnexpectedPrivilege() {
 	os.Stderr.WriteString(fmt.Sprintf(`
 --------------------------------------------------------------------------------
 + ERROR:
-+ Nanobox is designed to run as a standard user (non root)
-+ Please run all nanobox commands as a non privileged user
++ Microbox is designed to run as a standard user (non root)
++ Please run all microbox commands as a non privileged user
 --------------------------------------------------------------------------------
 
 `))
@@ -319,7 +319,7 @@ func PortInUse(port string) {
 --------------------------------------------------------------------------------
 ADDRESS IN USE
 It appears your local port (%s) is in use. Please specify a different port with
-the '-p' flag. (eg. 'nanobox tunnel data.db -p 5444')
+the '-p' flag. (eg. 'microbox tunnel data.db -p 5444')
 --------------------------------------------------------------------------------
 `, port))
 }
@@ -329,7 +329,7 @@ func PortPrivileged(port string) {
 --------------------------------------------------------------------------------
 PRIVILEGED PORT
 Port '%s' is a privileged port. Please specify a port greater than 1023 with
-the '-p' flag. (eg. 'nanobox tunnel data.db -p 5444')
+the '-p' flag. (eg. 'microbox tunnel data.db -p 5444')
 --------------------------------------------------------------------------------
 `, port))
 }
@@ -350,7 +350,7 @@ func ConsoleLocalCode() {
 --------------------------------------------------------------------------------
 CANNOT CONSOLE TO LOCAL CODE NODE
 It appears you are trying to console to a local code node. When consoling to a
-local web/worker, please use 'nanobox run'.
+local web/worker, please use 'microbox run'.
 --------------------------------------------------------------------------------
 `))
 }

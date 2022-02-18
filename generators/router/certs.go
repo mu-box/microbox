@@ -10,9 +10,9 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/nanobox-io/golang-portal-client"
+	portal "github.com/mu-box/golang-portal-client"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 func BuildCert(appModel *models.App) ([]portal.CertBundle, error) {

@@ -4,15 +4,15 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	container_generator "github.com/nanobox-io/nanobox/generators/containers"
-	hook_generator "github.com/nanobox-io/nanobox/generators/hooks/component"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/dhcp"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/hookit"
+	container_generator "github.com/mu-box/microbox/generators/containers"
+	hook_generator "github.com/mu-box/microbox/generators/hooks/component"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/dhcp"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/hookit"
 )
 
 // Setup sets up the component container and model data

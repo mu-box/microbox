@@ -6,7 +6,7 @@ import "testing"
 func TestLocalLock(t *testing.T) {
 	err := LocalLock()
 	if err != nil {
-		t.Errorf("unable to aquire lock %+v", err)
+		t.Errorf("unable to acquire lock %+v", err)
 	}
 	if lln == nil {
 		t.Errorf("lock was aqquired but the listener is not populated")
@@ -64,7 +64,7 @@ func TestLocalStackLocking(t *testing.T) {
 func TestGlobalLock(t *testing.T) {
 	err := GlobalLock()
 	if err != nil {
-		t.Errorf("unable to aquire lock %+v", err)
+		t.Errorf("unable to acquire lock %+v", err)
 	}
 	if gln == nil {
 		t.Errorf("lock was aqquired but the listener is not populated")

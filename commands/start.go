@@ -3,12 +3,12 @@ package commands
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/processors/provider/bridge"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/provider"
-	"github.com/nanobox-io/nanobox/util/service"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/processors/provider/bridge"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/provider"
+	"github.com/mu-box/microbox/util/service"
 )
 
 var (
@@ -16,7 +16,7 @@ var (
 	// StartCmd ...
 	StartCmd = &cobra.Command{
 		Use:   "start",
-		Short: "Start the Nanobox virtual machine.",
+		Short: "Start the Microbox virtual machine.",
 		Long:  ``,
 		Run:   startFn,
 	}
@@ -36,5 +36,5 @@ func startCheck() bool {
 	if provider.BridgeRequired() {
 		bridgeReady = bridge.Connected()
 	}
-	return provider.IsReady() && service.Running("nanobox-server") && bridgeReady
+	return provider.IsReady() && service.Running("microbox-server") && bridgeReady
 }

@@ -1,7 +1,7 @@
 package bridge
 
 import (
-	"github.com/nanobox-io/nanobox/util/provider/bridge"
+	"github.com/mu-box/microbox/util/provider/bridge"
 )
 
 // ask the server to stop the bridge

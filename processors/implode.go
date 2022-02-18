@@ -4,21 +4,21 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/env"
-	"github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/processors/server"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	util_provider "github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/env"
+	"github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/processors/server"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	util_provider "github.com/mu-box/microbox/util/provider"
 )
 
-// Implode destroys the provider and cleans nanobox off of the system
+// Implode destroys the provider and cleans microbox off of the system
 func Implode() error {
 
-	display.OpenContext("Imploding Nanobox")
+	display.OpenContext("Imploding Microbox")
 	defer display.CloseContext()
 
 	// remove all environments
@@ -40,13 +40,13 @@ func Implode() error {
 		return util.ErrorAppend(err, "failed to implode the provider")
 	}
 
-	// check to see if we need to uninstall nanobox
+	// check to see if we need to uninstall microbox
 	// or just remove apps
 	if registry.GetBool("full-implode") {
 
 		// teardown the server
+		//lint:ignore SA9003 if we cant tear down the server dont worry about it
 		if err := server.Teardown(); err != nil {
-			// if we cant tear down the server dont worry about it
 			// return util.ErrorAppend(err, "failed to remove server")
 		}
 

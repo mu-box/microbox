@@ -3,8 +3,8 @@ package share
 import (
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/provider/share"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/provider/share"
 )
 
 // Remove removes a share share from the workstation

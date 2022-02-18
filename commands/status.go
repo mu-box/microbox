@@ -3,8 +3,8 @@ package commands
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -12,7 +12,7 @@ var (
 	// StatusCmd ...
 	StatusCmd = &cobra.Command{
 		Use:   "status",
-		Short: "Display the status of your Nanobox VM & apps.",
+		Short: "Display the status of your Microbox VM & apps.",
 		Long:  ``,
 		Run:   statusFn,
 	}

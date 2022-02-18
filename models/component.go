@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/util"
 )
 
 type (

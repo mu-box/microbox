@@ -12,7 +12,7 @@ import (
 
 	"golang.org/x/crypto/ssh/terminal"
 
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/util/config"
 )
 
 var (

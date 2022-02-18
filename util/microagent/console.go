@@ -1,4 +1,4 @@
-package nanoagent
+package microagent
 
 import (
 	"fmt"
@@ -10,16 +10,16 @@ import (
 	syscall "github.com/docker/docker/pkg/signal"
 	"github.com/docker/docker/pkg/term"
 
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // establishes a remote docker client on a production app
 func Console(key, location string) error {
-	// establish connection to nanoagent
+	// establish connection to microagent
 	path := fmt.Sprintf("/exec?key=%s", key)
 	req, err := http.NewRequest("POST", path, nil)
 	if err != nil {
-		return fmt.Errorf("failed to generate a request for nanoagent: %s", err.Error())
+		return fmt.Errorf("failed to generate a request for microagent: %s", err.Error())
 	}
 
 	// printMOTD and warning
@@ -42,7 +42,7 @@ func Console(key, location string) error {
 	// if we are using a term, lets upgrade it to RawMode
 	if isTerminal {
 		// handle all incoming os signals and act accordingly; default behavior is to
-		// forward all signals to nanobox server
+		// forward all signals to microbox server
 		go monitor(stdOutFD, location, key)
 
 		oldInState, err := term.SetRawTerminal(stdInFD)
@@ -89,7 +89,7 @@ func resizeTTY(fd uintptr, location, key string) error {
 	w := int(ws.Width)
 	h := int(ws.Height)
 
-	// resize by posting to a path on nanoagent
+	// resize by posting to a path on microagent
 	url := fmt.Sprintf("https://%s/resizeexec?key=%s&w=%d&h=%d", location, key, w, h)
 
 	// POST

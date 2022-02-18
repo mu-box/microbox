@@ -72,7 +72,7 @@ func (part *DockerPercentPart) update(status Status) {
 
 	//
 	default:
-		// there is a chance if given a tag (nanobox/build:v1)
+		// there is a chance if given a tag (microbox/build:v1)
 		// it will be able to pull a part from the non labeled parts
 		if strings.HasPrefix(status.Status, "Pulling from") {
 			part.downloaded = 100

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 )
 
 func setProxyVars(config *docker.ContainerConfig) {

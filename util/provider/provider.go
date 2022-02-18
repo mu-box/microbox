@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 // Provider ...
@@ -66,7 +66,7 @@ func Valid() (error, []string) {
 
 func ValidReady() error {
 	if !IsReady() {
-		return errors.New("the provider is not ready try running 'nanobox start' first")
+		return errors.New("the provider is not ready try running 'microbox start' first")
 	}
 	return nil
 }

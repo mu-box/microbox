@@ -5,15 +5,15 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 func SubmitLog(args string) error {
-	// if we are running as privilage we dont submit
+	// if we are running as privilege we dont submit
 	if util.IsPrivileged() {
 		return nil
 	}
@@ -47,10 +47,10 @@ func SubmitLog(args string) error {
 		}
 	}
 
-	// tell nanobox
+	// tell microbox
 	go odin.SubmitEvent(
 		fmt.Sprintf("desktop/%s", args),
-		fmt.Sprintf("desktop command: nanobox %s", args),
+		fmt.Sprintf("desktop command: microbox %s", args),
 		app,
 		map[string]interface{}{
 			"os":         runtime.GOOS,

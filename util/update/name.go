@@ -1,6 +1,7 @@
+//go:build !windows
 // +build !windows
 
 package update
 
-var Name = "nanobox"
-var TmpName = "nanobox.tmp"
+var Name = "microbox"
+var TmpName = "microbox.tmp"

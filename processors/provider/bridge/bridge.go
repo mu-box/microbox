@@ -3,12 +3,13 @@ package bridge
 import (
 	"fmt"
 	"path/filepath"
+
 	// "runtime"
 	"net"
 
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/dhcp"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/dhcp"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 func BridgeConfig() string {
@@ -65,7 +66,7 @@ func Connected() bool {
 		return false
 	}
 
-	// look throught the interfaces on the system
+	// look through the interfaces on the system
 	for _, i := range interfaces {
 		addrs, err := i.Addrs()
 		if err != nil {

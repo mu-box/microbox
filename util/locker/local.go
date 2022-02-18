@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/config"
 )
 
 var (
@@ -29,7 +29,7 @@ func LocalLock() error {
 
 	mutex.Lock()
 	lCount++
-	lumber.Trace("local lock aquired (%d)", lCount)
+	lumber.Trace("local lock acquired (%d)", lCount)
 	mutex.Unlock()
 
 	return nil
@@ -69,7 +69,7 @@ func LocalUnlock() (err error) {
 	lumber.Trace("local lock released (%d)", lCount)
 	mutex.Unlock()
 
-	// if im not the last guy to release my lock quit immidiately instead of closing
+	// if im not the last guy to release my lock quit immediately instead of closing
 	// the connection
 	if lCount > 0 || lln == nil {
 		return nil

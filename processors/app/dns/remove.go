@@ -5,11 +5,11 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/server"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/dns"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/server"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/dns"
 )
 
 // Remove removes a dns entry from the local hosts file
@@ -35,7 +35,7 @@ func Remove(a *models.App, name string) error {
 	// remove the entry
 	if err := dns.Remove(entry); err != nil {
 		lumber.Error("dns:Remove:dns.Remove(%s): %s", entry, err.Error())
-		return util.ErrorAppend(err, "unable to add dns entry: %s")
+		return util.ErrorAppend(err, "unable to add dns entry: %s", err)
 	}
 
 	display.Info("\n%s %s removed\n", display.TaskComplete, name)

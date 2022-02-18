@@ -10,12 +10,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/util/config"
 )
 
 const (
 
-	// VERSION is the global version for nanobox; mainly used in the update process
+	// VERSION is the global version for microbox; mainly used in the update process
 	// but placed here to allow access when needed (commands, processor, etc.)
 	letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 )

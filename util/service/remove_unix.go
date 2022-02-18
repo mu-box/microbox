@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 package service
@@ -13,7 +14,7 @@ func Remove(name string) error {
 		cmd := removeCmd(name)
 		out, err := exec.Command(cmd[0], cmd[1:]...).CombinedOutput()
 		if err != nil {
-			fmt.Errorf("out: %s, err: %s", out, err)
+			return fmt.Errorf("out: %s, err: %s", out, err)
 		}
 
 	}

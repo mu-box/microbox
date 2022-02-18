@@ -3,8 +3,8 @@ package build
 import (
 	"encoding/json"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/dns"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/dns"
 )
 
 func DevPayload(appModel *models.App) string {
@@ -15,7 +15,7 @@ func DevPayload(appModel *models.App) string {
 	rtn := map[string]interface{}{}
 	rtn["env"] = evars
 	rtn["boxfile"] = appModel.DeployedBoxfile
-	rtn["dns_entries"] = dns.List(" by nanobox")
+	rtn["dns_entries"] = dns.List(" by microbox")
 	bytes, _ := json.Marshal(rtn)
 	return string(bytes)
 }

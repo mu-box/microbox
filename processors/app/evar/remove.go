@@ -3,9 +3,9 @@ package evar
 import (
 	"fmt"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
 )
 
 func Remove(appModel *models.App, keys []string) error {

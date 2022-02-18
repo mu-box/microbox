@@ -13,7 +13,11 @@ getCurrTag() {
   echo `git describe --always --tags --abbrev=0 | tr -d "[v\r\n]"`
 }
 
-BUILD_DATE=`date -u +%y%m%dT%H%M`
+getTagDir() {
+  echo `getCurrTag | sed -E 's/([0-9]+)\..+/v\1/'`
+}
+
+BUILD_DATE=`date -u +%Y%m%dT%H%M%S`
 # ^for versioning
 
 # remove any previous builds that may have failed
@@ -21,24 +25,24 @@ BUILD_DATE=`date -u +%y%m%dT%H%M`
   echo "Cleaning up old builds..." && \
   rm -rf "./.build"
 
-printf "\nBuilding nanobox...\n"
+printf "\nBuilding microbox...\n"
 
-# build nanobox
-gox -ldflags "-s -w -X github.com/nanobox-io/nanobox/util/odin.apiKey=$API_KEY \
-			  -X github.com/nanobox-io/nanobox/models.nanoVersion=$(getCurrTag) \
-			  -X github.com/nanobox-io/nanobox/models.nanoCommit=$(getCurrCommit) \
-			  -X github.com/nanobox-io/nanobox/models.nanoBuild=$BUILD_DATE" \
-			  -osarch "darwin/amd64 linux/amd64 windows/amd64" -output="./.build/v2/{{.OS}}/{{.Arch}}/nanobox"
+# build microbox
+gox -ldflags "-s -w -X github.com/mu-box/microbox/util/odin.apiKey=$API_KEY \
+			  -X github.com/mu-box/microbox/models.microVersion=$(getCurrTag) \
+			  -X github.com/mu-box/microbox/models.microCommit=$(getCurrCommit) \
+			  -X github.com/mu-box/microbox/models.microBuild=$BUILD_DATE" \
+			  -osarch "darwin/amd64 darwin/arm64 linux/amd64 linux/arm linux/arm64 linux/s390x windows/amd64" -output="./.build/$(getTagDir)/{{.OS}}/{{.Arch}}/microbox"
 
 printf "\nWriting version file...\n"
-echo -en "Nanobox Version $(getCurrTag)-$BUILD_DATE ($(getCurrCommit))" > ./.build/v2/version
+echo -n "Microbox Version $(getCurrTag)-$BUILD_DATE ($(getCurrCommit))" > ./.build/$(getTagDir)/version
 
-printf "\nBuilding nanobox updater...\n"
+printf "\nBuilding microbox updater...\n"
 
-# change into updater directory and build nanobox updater
-cd ./updater && gox -osarch "darwin/amd64 linux/amd64 windows/amd64" -ldflags="-s" -output="../.build/v2/{{.OS}}/{{.Arch}}/nanobox-update"
+# change into updater directory and build microbox updater
+cd ./updater && gox -osarch "darwin/amd64 darwin/arm64 linux/amd64 linux/arm linux/arm64 linux/s390x windows/amd64" -ldflags="-s" -output="../.build/$(getTagDir)/{{.OS}}/{{.Arch}}/microbox-update"
 
 #cd ..
 
 #printf "\nCompacting binaries...\n"
-#upx ./.build/v2/*/amd64/nanobox*
+#upx ./.build/$(getTagDir)/*/*/microbox*

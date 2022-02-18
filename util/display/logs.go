@@ -7,11 +7,11 @@ import (
 	"time"
 
 	"github.com/mitchellh/colorstring"
-	"github.com/nanopack/logvac/core"
-	"github.com/nanopack/mist/core"
+	logvac "github.com/mu-box/logvac/core"
+	mist "github.com/mu-box/mist/core"
 )
 
-// Entry represents the data comming back from a mist message (mist.Message.Data)
+// Entry represents the data coming back from a mist message (mist.Message.Data)
 type Entry struct {
 	Time     time.Time `json:"time"`     // "2016-09-07T20:33:34.446275741Z"
 	UTime    int       `json:"utime"`    // 1473280414446275741

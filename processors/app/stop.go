@@ -5,15 +5,16 @@ import (
 	// "net"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/component"
-	process_provider "github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/util"
-	// "github.com/nanobox-io/nanobox/util/dhcp"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/locker"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/component"
+	process_provider "github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/util"
+
+	// "github.com/mu-box/microbox/util/dhcp"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/locker"
 )
 
 // Stop will stop all services associated with an app
@@ -65,7 +66,7 @@ func Stop(appModel *models.App) error {
 
 func stopDevContainer(appModel *models.App) error {
 	// grab the container info
-	container, err := docker.GetContainer(fmt.Sprintf("nanobox_%s", appModel.ID))
+	container, err := docker.GetContainer(fmt.Sprintf("microbox_%s", appModel.ID))
 	if err != nil {
 		// if we cant get the container it may have been removed by someone else
 		// just return here
@@ -86,7 +87,7 @@ func stopDevContainer(appModel *models.App) error {
 	// if err := dhcp.ReturnIP(net.ParseIP(ip)); err != nil {
 	// 	lumber.Error("dev:console:teardown:dhcp.ReturnIP(%s): %s", ip, err)
 
-	// 	lumber.Error("An error occurred durring dev console teadown:%s", err.Error())
+	// 	lumber.Error("An error occurred during dev console teadown:%s", err.Error())
 	// 	return util.ErrorAppend(err, "failed to return unused IP back to pool")
 	// }
 	return nil

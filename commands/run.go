@@ -5,16 +5,16 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/processors/app"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/console"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/processors/app"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/console"
+	"github.com/mu-box/microbox/util/display"
 
 	// imported because we need its steps added
-	_ "github.com/nanobox-io/nanobox/commands/dev"
+	_ "github.com/mu-box/microbox/commands/dev"
 )
 
 // RunCmd ...
@@ -22,10 +22,10 @@ var RunCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Start your local development environment.",
 	Long: `
-Starts your local development enviroment and opens an
+Starts your local development environment and opens an
 interactive console inside the environment.
 
-You can also pass a command into 'run'. Nanobox will
+You can also pass a command into 'run'. Microbox will
 run the command without dropping you into a console
 in your local environment.
 	`,

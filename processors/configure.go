@@ -7,14 +7,14 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
 )
 
 var configured bool
 
 func Configure() error {
-	var os string
+	var os, arch string
 
 	// make sure to only run configure one time
 	if configured {
@@ -22,9 +22,16 @@ func Configure() error {
 	}
 	configured = true
 
-	v, err := util.OsDetect()
-	if err == nil {
+	if v, err := util.OsDetect(); err != nil {
+		return err
+	} else {
 		os = v
+	}
+
+	if v, err := util.ArchDetect(); err != nil {
+		return err
+	} else {
+		arch = v
 	}
 
 	if os == "high sierra" && !models.HasRead() {
@@ -33,15 +40,15 @@ func Configure() error {
 --------------------------------------------------------------------------------
 + WARNING:
 +
-+ MacOS High Sierra introduces breaking changes to Nanobox!
++ MacOS High Sierra introduces breaking changes to Microbox!
 +
 + Please ensure you have read the following guides before continuing:
-+ https://content.nanobox.io/installing-nanobox-on-macos-high-sierra/
++ https://microbox.rocks/installing-microbox-on-macos-high-sierra/
 --------------------------------------------------------------------------------
 
 Have you already read the guide? y/n`, map[string]string{"y": "yes", "n": "no"})
 		if hasRead == "no" {
-			exec.Command("open", "https://content.nanobox.io/installing-nanobox-on-macos-high-sierra/").Start()
+			exec.Command("open", "https://microbox.rocks/installing-microbox-on-macos-high-sierra/").Start()
 			return fmt.Errorf("\nEnding configure, please read the guide and try again.\n")
 		}
 		models.DoneRead()
@@ -58,38 +65,40 @@ Have you already read the guide? y/n`, map[string]string{"y": "yes", "n": "no"})
 	}
 
 	fmt.Print(`
-CONFIGURE NANOBOX
+CONFIGURE MICROBOX
 ---------------------------------------------------------------
 Please answer the following questions so we can customize your
-nanobox configuration. Feel free to update your config at any
-time by running: 'nanobox configure'
+microbox configuration. Feel free to update your config at any
+time by running: 'microbox configure'
 
-(Learn more at : https://docs.nanobox.io/local-config/configure-nanobox/)
+(Learn more at : https://docs.microbox.cloud/local-config/configure-microbox/)
 `)
 
 	defer func() {
-		fmt.Println(`
+		fmt.Print(`
       **
    *********
-***************   [√] Nanobox successfully Configured!
+***************   [√] Microbox successfully Configured!
 :: ********* ::   ------------------------------------------------------------
-" ::: *** ::: "   Change these settings at any time via : 'nanobox configure'
+" ::: *** ::: "   Change these settings at any time via : 'microbox configure'
   ""  :::  ""
     "" " ""
        "
 `)
 	}()
 
-	// ask about provider
-	config.Provider = stringAsker(`
-How would you like to run nanobox?
+	// docker-machine provider uses VirtualBox at the moment, which doesn't work on anything but amd64, and adds unnecessary overhead on Linux
+	if os == "linux" || arch != "amd64" {
+		config.Provider = "native"
+	} else {
+		// ask about provider
+		config.Provider = stringAsker(`
+How would you like to run microbox?
   a) Inside a lightweight VM
   b) Via Docker Native
 
-  Note : Mac users, we strongly recommend choosing (a) until Docker Native
-         resolves an issue causing slow speeds : http://bit.ly/2jYFfWQ
-
 Answer: `, map[string]string{"a": "docker-machine", "b": "native"})
+	}
 
 	// if provider == docker-machine ask more questions
 	if config.Provider == "native" {
@@ -113,7 +122,8 @@ How many GB of RAM would you like to make available to the VM (2-4)?
 
 Answer: `, 8)
 
-	if os != "high sierra" {
+	// Don't offer netfs on High Sierra or above
+	if os == "sierra" || os == "windows" {
 		// ask about mount types
 		config.MountType = stringAsker(`
 Would you like to enable netfs for faster filesystem access (y/n)?
@@ -136,7 +146,7 @@ func stringAsker(text string, answers map[string]string) string {
 
 	result, ok := answers[answer]
 	for !ok {
-		fmt.Println("Invalid response, please try again:")
+		fmt.Print("\nInvalid response, please try again:\n")
 		fmt.Print(text)
 		fmt.Scanln(&answer)
 		result, ok = answers[answer]
@@ -151,7 +161,7 @@ func intAsker(text string, max int) int {
 	fmt.Scanln(&answer)
 
 	for answer > max {
-		fmt.Println("\nInvalid response, please try again:\n")
+		fmt.Print("\nInvalid response, please try again:\n")
 		fmt.Print(text)
 		fmt.Scanln(&answer)
 	}

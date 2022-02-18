@@ -3,13 +3,13 @@ package processors
 import (
 	"strings"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/nanoagent"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/microagent"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 func Console(envModel *models.Env, consoleConfig ConsoleConfig) error {
@@ -25,7 +25,7 @@ func Console(envModel *models.Env, consoleConfig ConsoleConfig) error {
 		appID = remote.ID
 	}
 
-	// set odins endpoint if the arguement is passed
+	// set odins endpoint if the argument is passed
 	if endpoint := registry.GetString("endpoint"); endpoint != "" {
 		odin.SetEndpoint(endpoint)
 	}
@@ -61,11 +61,11 @@ func Console(envModel *models.Env, consoleConfig ConsoleConfig) error {
 
 	switch protocol {
 	case "docker":
-		if err := nanoagent.Console(key, location); err != nil {
+		if err := microagent.Console(key, location); err != nil {
 			return util.ErrorAppend(err, "failed to connect to remote console session")
 		}
 	case "ssh":
-		if err := nanoagent.SSH(key, location); err != nil {
+		if err := microagent.SSH(key, location); err != nil {
 			return util.ErrorAppend(err, "failed to connect to remote ssh server")
 		}
 	}

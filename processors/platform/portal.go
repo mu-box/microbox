@@ -5,10 +5,10 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/golang-portal-client"
-	generator "github.com/nanobox-io/nanobox/generators/router"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
+	portal "github.com/mu-box/golang-portal-client"
+	generator "github.com/mu-box/microbox/generators/router"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
 )
 
 // UpdatePortal ...

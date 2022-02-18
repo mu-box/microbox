@@ -6,13 +6,13 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	app_evar "github.com/nanobox-io/nanobox/processors/app/evar"
-	production_evar "github.com/nanobox-io/nanobox/processors/evar"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	app_evar "github.com/mu-box/microbox/processors/app/evar"
+	production_evar "github.com/mu-box/microbox/processors/evar"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // RemoveCmd removes an evar.
@@ -23,7 +23,7 @@ var RemoveCmd = &cobra.Command{
 
 The alias must be used when removing variables from a production app.
 If you would like to remove variables from a different app, please add
-it as a remote as follows: 'nanobox remote add <APPNAME> <ALIAS>'.
+it as a remote as follows: 'microbox remote add <APPNAME> <ALIAS>'.
 You may then perform the 'rm' again, specifying that alias.`,
 	Run: removeFn,
 }

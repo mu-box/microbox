@@ -8,9 +8,9 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // add mounts using cifs for windows development
@@ -53,7 +53,7 @@ func (machine DockerMachine) addNetfsMount(local, host string) error {
 
 	// mount!
 	// mount -t cifs -o sec=ntlmssp,username=USER,password=PASSWORD,uid=1000,gid=1000 //192.168.99.1/<path to app> /<vm location>
-	source := fmt.Sprintf("//192.168.99.1/nanobox-%s", appID)
+	source := fmt.Sprintf("//192.168.99.1/microbox-%s", appID)
 	// mfsymlinks,
 	config, _ := models.LoadConfig()
 	additionalOptions := config.NetfsMountOpts

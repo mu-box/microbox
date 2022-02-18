@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var Server bool
@@ -26,7 +26,7 @@ func Run(path string) error {
 		return err
 	}
 
-	if !strings.Contains(path, "nanobox-update") {
+	if !strings.Contains(path, "microbox-update") {
 		fmt.Printf("Current version: %s", getCurrentVersion(path))
 	}
 
@@ -55,10 +55,10 @@ func Run(path string) error {
 	// update the model
 	update := newUpdate()
 
-	if !strings.Contains(path, "nanobox-update") {
+	if !strings.Contains(path, "microbox-update") {
 		fmt.Printf("\nUpdated to version: %s\n\n", getCurrentVersion(path))
 		fmt.Println("Check out the release notes here:")
-		fmt.Println("https://github.com/nanobox-io/nanobox/blob/master/CHANGELOG.md")
+		fmt.Println("https://github.com/mu-box/microbox/blob/master/CHANGELOG.md")
 	}
 
 	return update.Save()
@@ -71,7 +71,7 @@ func getCurrentVersion(path string) string {
 	}
 	version, err := exec.Command(path, "version").Output()
 	if err != nil {
-		fmt.Println("Error while trying to get the nanobox version")
+		fmt.Println("Error while trying to get the microbox version")
 		return ""
 	}
 	return string(version)

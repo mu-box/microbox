@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 type (
@@ -17,7 +17,7 @@ var (
 	// InspectCmd ...
 	InspectCmd = &cobra.Command{
 		Use:    "inspect",
-		Short:  "Show element from the nanobox database.",
+		Short:  "Show element from the microbox database.",
 		Long:   ``,
 		Run:    inspectFunc,
 		Hidden: true,

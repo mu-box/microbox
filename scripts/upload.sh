@@ -17,4 +17,4 @@ done
 
 # upload to AWS S3
 echo "Uploading builds to S3..."
-aws s3 sync ./.build/v2/ s3://tools.nanobox.io/nanobox/v2 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --region us-east-1
+aws s3 sync ./.build/v2/ s3://tools.microbox.cloud/microbox/v2 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --region us-east-1

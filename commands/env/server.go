@@ -3,8 +3,8 @@ package env
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/processors/server"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/processors/server"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (

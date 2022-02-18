@@ -26,8 +26,8 @@ _testmain.go
 # Project specific files
 .DS_Store
 TODO
-nanobox
-nanobox-*
+microbox
+microbox-*
 updater/updater
 updater/updater-*
 .build
@@ -36,3 +36,5 @@ Icon
 .sync
 nb.setup
 vendor/*/
+.env
+.secrets

@@ -26,21 +26,21 @@ var setupComponents = []PlatformComponent{
 	{
 		label: "Logger",
 		name:  "logvac",
-		image: "nanobox/logvac",
+		image: "mubox/logvac",
 	},
 	{
 		label: "Message Bus",
 		name:  "mist",
-		image: "nanobox/mist",
+		image: "mubox/mist",
 	},
 	{
 		label: "Router",
 		name:  "portal",
-		image: "nanobox/portal",
+		image: "mubox/portal",
 	},
 	{
 		label: "Storage",
 		name:  "hoarder",
-		image: "nanobox/hoarder",
+		image: "mubox/hoarder",
 	},
 }

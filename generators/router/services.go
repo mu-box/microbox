@@ -4,11 +4,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nanobox-io/golang-portal-client"
-	"github.com/nanobox-io/nanobox-boxfile"
+	portal "github.com/mu-box/golang-portal-client"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/display"
 )
 
 // Update the ports that portal knows about.
@@ -26,7 +26,7 @@ func BuildServices(appModel *models.App) []portal.Service {
 		for _, service := range buildComponentServices(boxfile.Node(node), component) {
 
 			if duplicateService(services, service) {
-				continue // if there is a duplicate port we will just contine
+				continue // if there is a duplicate port we will just continue
 			}
 
 			// add the new service to the list of services

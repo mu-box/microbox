@@ -3,13 +3,13 @@ package processors
 import (
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/code"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/code"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 //
@@ -74,7 +74,7 @@ func getWarehouseConfig(envModel *models.Env, appID string) (warehouseConfig cod
 	token, url, err := odin.GetWarehouse(appID)
 	if err != nil {
 		lumber.Error("deploy:setWarehouseToken:GetWarehouse(%s): %s", appID, err.Error())
-		err = util.ErrorAppend(err, "failed to fetch warehouse information from nanobox")
+		err = util.ErrorAppend(err, "failed to fetch warehouse information from microbox")
 		return
 	}
 
@@ -82,7 +82,7 @@ func getWarehouseConfig(envModel *models.Env, appID string) (warehouseConfig cod
 	prevBuild, err := odin.GetPreviousBuild(appID)
 	if err != nil {
 		lumber.Error("deploy:setWarehouseToken:GetPreviousBuild(%s): %s", appID, err.Error())
-		err = util.ErrorAppend(err, "failed to query previous deploys from nanobox")
+		err = util.ErrorAppend(err, "failed to query previous deploys from microbox")
 		return
 	}
 

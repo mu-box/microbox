@@ -7,11 +7,11 @@ import (
 	"path/filepath"
 
 	"github.com/boltdb/bolt"
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/util/config"
 )
 
 var (
-	// DB is the path to the local nanobox database
+	// DB is the path to the local microbox database
 	DB = filepath.ToSlash(filepath.Join(config.GlobalDir(), "data.db"))
 )
 
@@ -83,7 +83,7 @@ func get(bucket, id string, v interface{}) error {
 
 		// Fetch the value
 		value := bucket.Get([]byte(id))
-		if value == nil || len(value) == 0 {
+		if len(value) == 0 {
 			return fmt.Errorf("no record found")
 		}
 
@@ -184,7 +184,7 @@ func getAll(bucket string, v interface{}) error {
 		// Fetch the values and append them to the elements array
 		for _, key := range keys {
 			value := bucket.Get([]byte(key))
-			if value == nil || len(value) == 0 {
+			if len(value) == 0 {
 				return fmt.Errorf("no record found")
 			}
 			elements = append(elements, value)

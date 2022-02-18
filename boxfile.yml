@@ -1,7 +1,7 @@
 run.config:
   engine: golang
   engine.config:
-    package: github.com/nanobox-io/nanobox
+    package: github.com/mu-box/microbox
   dev_packages:
     - py27-awscli
     - coreutils

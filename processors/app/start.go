@@ -3,11 +3,11 @@ package app
 import (
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/component"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/locker"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/component"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/locker"
 )
 
 // Start will start all services associated with an app

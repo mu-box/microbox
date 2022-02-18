@@ -7,17 +7,17 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/nanobox-io/nanobox-boxfile"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 var (
-	CmdErrRegex = regexp.MustCompile(":\\s?$")
+	CmdErrRegex = regexp.MustCompile(`:\s?$`)
 )
 
 // CommandErr ...
@@ -77,24 +77,24 @@ Suggest : %s`, output, parsedErr.suggest)
 
 	conf, _ := models.LoadConfig()
 
-	// submit error to nanobox
+	// submit error to microbox
 	odin.SubmitEvent(
 		"desktop#error",
-		"an error occurred running nanobox desktop",
+		"an error occurred running microbox desktop",
 		appID,
 		map[string]interface{}{
-			"app-id":          appID,
-			"app-name":        appName,
-			"boxfile":         boxfileString,
-			"context":         parsedErr.context,
-			"error":           parsedErr.cause,
-			"mount-type":      conf.MountType,
-			"nanobox-version": models.VersionString(),
-			"output":          parsedErr.output,
-			"os":              runtime.GOOS,
-			"provider":        conf.Provider,
-			"suggest":         parsedErr.suggest,
-			"team":            parsedErr.team,
+			"app-id":           appID,
+			"app-name":         appName,
+			"boxfile":          boxfileString,
+			"context":          parsedErr.context,
+			"error":            parsedErr.cause,
+			"mount-type":       conf.MountType,
+			"microbox-version": models.VersionString(),
+			"output":           parsedErr.output,
+			"os":               runtime.GOOS,
+			"provider":         conf.Provider,
+			"suggest":          parsedErr.suggest,
+			"team":             parsedErr.team,
 		},
 	)
 
@@ -142,7 +142,7 @@ func parseCommandErr(err error) errBits {
 	var team, cause, context string
 
 	// if it is one of our utility errors we can
-	// extract the cause and the stack seperately
+	// extract the cause and the stack separately
 	if er, ok := err.(util.Err); ok {
 		bits := errBits{}
 		bits.team, bits.cause = parseTeam(er.Message)

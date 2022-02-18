@@ -10,11 +10,11 @@ import (
 	syscall "github.com/docker/docker/pkg/signal"
 	"github.com/docker/docker/pkg/term"
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
 )
 
 type ConsoleConfig struct {
@@ -50,7 +50,7 @@ func Run(id string, consoleConfig ConsoleConfig) error {
 	stdInFD, isTerminal := term.GetFdInfo(stdin)
 	stdOutFD, _ := term.GetFdInfo(stdout)
 
-	user := "gonano"
+	user := "gomicro"
 	if registry.GetString("console_user") != "" {
 		user = registry.GetString("console_user")
 	}
@@ -82,7 +82,7 @@ func Run(id string, consoleConfig ConsoleConfig) error {
 	}
 	defer resp.Conn.Close()
 
-	console := models.Console{exec.ID, id}
+	console := models.Console{ID: exec.ID, ContainerID: id}
 	console.Save()
 	defer console.Delete()
 

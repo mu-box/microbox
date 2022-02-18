@@ -4,9 +4,9 @@ import (
 	"net"
 	"testing"
 
-	"github.com/nanobox-io/nanobox/generators/containers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util/dhcp"
+	"github.com/mu-box/microbox/generators/containers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util/dhcp"
 )
 
 func TestBuildConfig(t *testing.T) {
@@ -38,7 +38,7 @@ func TestComponentConfig(t *testing.T) {
 	result := containers.ComponentConfig(componentModel)
 	if result.Image != "imagename" ||
 		result.IP != "1.2.3.4" ||
-		result.Name != "nanobox_2_name" {
+		result.Name != "microbox_2_name" {
 		t.Errorf("bad results")
 	}
 }
@@ -55,8 +55,8 @@ func TestPublishConfig(t *testing.T) {
 func TestDevConfig(t *testing.T) {
 	appModel := &models.App{EnvID: "1", ID: "2"}
 	result := containers.DevConfig(appModel)
-	if result.Image != "nanobox/build" ||
-		result.Name != "nanobox_2" {
+	if result.Image != "mubox/build" ||
+		result.Name != "microbox_2" {
 		// TODO: add checks for the binds
 		// TODO: add lib dir check
 		t.Errorf("bad results")

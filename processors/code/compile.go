@@ -5,15 +5,15 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	container_generator "github.com/nanobox-io/nanobox/generators/containers"
-	hook_generator "github.com/nanobox-io/nanobox/generators/hooks/build"
+	container_generator "github.com/mu-box/microbox/generators/containers"
+	hook_generator "github.com/mu-box/microbox/generators/hooks/build"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/hookit"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/hookit"
 )
 
 // Compile builds the codebase that can then be deployed
@@ -70,7 +70,7 @@ func prepareCompileEnvironment(containerID string) error {
 		// handle 'exec failed: argument list too long' error
 		if strings.Contains(out, "argument list too long") {
 			if err2, ok := err.(util.Err); ok {
-				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `nanobox config set ssh-key ~/.ssh/id_rsa`"
+				err2.Suggest = "You may have too many ssh keys, please specify the one you need with `microbox config set ssh-key ~/.ssh/id_rsa`"
 				err2.Output = out
 				err2.Code = "1001"
 				return util.ErrorAppend(err2, "failed to run the (compile)user hook")

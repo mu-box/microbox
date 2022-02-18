@@ -3,7 +3,7 @@ package containers
 import (
 	"testing"
 
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 )
 
 func TestSetProxyVars(t *testing.T) {

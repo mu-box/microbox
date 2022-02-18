@@ -5,13 +5,13 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/provider/bridge"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/dhcp"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/locker"
-	"github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/provider/bridge"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/dhcp"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/locker"
+	"github.com/mu-box/microbox/util/provider"
 )
 
 // Setup sets up the provider (launch VM, etc)
@@ -37,7 +37,7 @@ func Setup() error {
 		return nil
 	}
 
-	display.OpenContext("Starting Nanobox")
+	display.OpenContext("Starting Microbox")
 
 	// create the provider (VM)
 	if err := util.Retry(provider.Create, 3, 20*time.Second); err != nil {

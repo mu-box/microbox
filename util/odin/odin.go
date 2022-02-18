@@ -14,21 +14,21 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
 )
 
 const (
-	NANOBOX  = "https://api.nanobox.io/v1/"
-	BONESALT = "https://api.bonesalt.com/v1/"
-	DEV      = "http://api.nanobox.local:8080/v1/"
-	SIM      = "http://api.nanobox.test/v1/"
+	MICROBOX = "https://api.microbox.cloud/v1/"
+	WYCROBOX = "https://api.xn-box-wyc.cloud/v1/"
+	DEV      = "http://api.microbox.local:8080/v1/"
+	SIM      = "http://api.microbox.test/v1/"
 )
 
 var (
-	// set the default endpoint to nanobox
-	endpoint = "nanobox"
+	// set the default endpoint to microbox
+	endpoint = "microbox"
 	apiKey   string
 )
 
@@ -211,7 +211,7 @@ func EstablishTunnel(tunCfg models.TunnelConfig) (models.TunnelInfo, error) {
 func EstablishConsole(appID, id string) (string, string, string, error) {
 	// use a default user
 	params := url.Values{}
-	params.Set("user", "gonano")
+	params.Set("user", "gomicro")
 	if registry.GetString("console_user") != "" {
 		params.Set("user", registry.GetString("console_user"))
 	}
@@ -341,11 +341,11 @@ func doRequest(method, path string, params url.Values, requestBody, responseBody
 	// if they have not logged in but the user name and password are both set
 	// use attempt to authenticate
 	if auth.Key == "" &&
-		os.Getenv("NANOBOX_PASSWORD") != "" &&
-		os.Getenv("NANOBOX_USERNAME") != "" &&
+		os.Getenv("MICROBOX_PASSWORD") != "" &&
+		os.Getenv("MICROBOX_USERNAME") != "" &&
 		path != "user_auth_token" {
 
-		auth.Key, _ = Auth(os.Getenv("NANOBOX_USERNAME"), os.Getenv("NANOBOX_PASSWORD"))
+		auth.Key, _ = Auth(os.Getenv("MICROBOX_USERNAME"), os.Getenv("MICROBOX_PASSWORD"))
 	}
 
 	if params == nil {
@@ -385,7 +385,7 @@ func doRequest(method, path string, params url.Values, requestBody, responseBody
 		err = util.ErrorfQuiet("[USER] Unauthorized (%s)", b)
 		if err != nil {
 			if err2, ok := err.(util.Err); ok {
-				err2.Suggest = "It appears you are not logged in, run `nanobox login` and try again"
+				err2.Suggest = "It appears you are not logged in, run `microbox login` and try again"
 				return err2
 			}
 		}
@@ -408,7 +408,7 @@ func doRequest(method, path string, params url.Values, requestBody, responseBody
 		rb := map[string]string{}
 		err = json.Unmarshal(b, &rb)
 		if err != nil {
-			return util.ErrorfQuiet("[NANOBOX] %s", b)
+			return util.ErrorfQuiet("[MICROBOX] %s", b)
 		}
 
 		errorMessage, ok := rb["error"]
@@ -442,13 +442,13 @@ func odinURL() string {
 		return o
 	}
 	switch endpoint {
-	case "bonesalt":
-		return BONESALT
+	case "wycrobox":
+		return WYCROBOX
 	case "dev":
 		return DEV
 	case "sim":
 		return SIM
 	default:
-		return NANOBOX
+		return MICROBOX
 	}
 }

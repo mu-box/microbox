@@ -13,17 +13,17 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanopack/logvac/core"
-	"github.com/nanopack/mist/core"
+	logvac "github.com/mu-box/logvac/core"
+	mist "github.com/mu-box/mist/core"
 	"golang.org/x/net/websocket"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
-	"github.com/nanobox-io/nanobox/util/odin"
+	"github.com/mu-box/microbox/commands/registry"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
+	"github.com/mu-box/microbox/util/odin"
 )
 
 // Tail tails production logs for an app.
@@ -39,7 +39,7 @@ func Tail(envModel *models.Env, app string, logOpts models.LogOpts) error {
 		appID = remote.ID
 	}
 
-	// set odins endpoint if the arguement is passed
+	// set odins endpoint if the argument is passed
 	if endpoint := registry.GetString("endpoint"); endpoint != "" {
 		odin.SetEndpoint(endpoint)
 	}
@@ -82,7 +82,7 @@ func Print(envModel *models.Env, app string, logOpts models.LogOpts) error {
 		appID = remote.ID
 	}
 
-	// set odins endpoint if the arguement is passed
+	// set odins endpoint if the argument is passed
 	if endpoint := registry.GetString("endpoint"); endpoint != "" {
 		odin.SetEndpoint(endpoint)
 	}
@@ -101,7 +101,7 @@ func Print(envModel *models.Env, app string, logOpts models.LogOpts) error {
 	token, url, err := odin.GetComponent(appID, "logger")
 	if err != nil {
 		lumber.Error("deploy:setMistToken:GetMist(%s): %s", appID, err.Error())
-		err = util.ErrorAppend(err, "failed to fetch logvac information from nanobox")
+		err = util.ErrorAppend(err, "failed to fetch logvac information from microbox")
 		return err
 	}
 
@@ -123,7 +123,7 @@ func getMistConfig(envModel *models.Env, appID string) (*MistConfig, error) {
 	token, url, err := odin.GetComponent(appID, "pusher")
 	if err != nil {
 		lumber.Error("deploy:setMistToken:GetMist(%s): %s", appID, err.Error())
-		err = util.ErrorAppend(err, "failed to fetch mist information from nanobox")
+		err = util.ErrorAppend(err, "failed to fetch mist information from microbox")
 		return nil, err
 	}
 
@@ -153,7 +153,7 @@ func mistListen(token, url string, logOpts models.LogOpts) error {
 	signal.Notify(sigChan, os.Interrupt)
 	signal.Notify(sigChan, os.Kill)
 
-	// if `-f` wasn't explicity called, print what we are doing
+	// if `-f` wasn't explicitly called, print what we are doing
 	if !logFollow {
 		fmt.Printf(`
 Connected to streaming logs:
@@ -164,7 +164,7 @@ waiting for output...
 `)
 	}
 
-	// loop waiting for messages or signals if we recieve a kill signal quit
+	// loop waiting for messages or signals if we receive a kill signal quit
 	// messages will be displayed
 	// msgChan := client.Messages()
 	for {
@@ -182,7 +182,7 @@ waiting for output...
 var messageChan chan mist.Message
 
 func newMistClient(token, address string) (*websocket.Conn, error) {
-	origin := "https://nanoapp.localhost"
+	origin := "https://microapp.localhost"
 	url := "wss://" + address + ":1446/subscribe/websocket?X-AUTH-TOKEN=" + token
 
 	config, err := websocket.NewConfig(url, origin)

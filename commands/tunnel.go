@@ -7,12 +7,12 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/helpers"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/helpers"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -56,7 +56,7 @@ func tunnelFn(ccmd *cobra.Command, args []string) {
 Wrong number of arguments (expecting 1 got %d). Run the command again with the
 name of the component you would like to tunnel into:
 
-ex: nanobox tunnel <component>
+ex: microbox tunnel <component>
 
 `, len(args))
 

@@ -3,7 +3,7 @@ package steps
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/registry"
+	"github.com/mu-box/microbox/commands/registry"
 )
 
 func Run(stepNames ...string) func(ccmd *cobra.Command, args []string) {

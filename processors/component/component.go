@@ -4,10 +4,10 @@ package component
 import (
 	"fmt"
 
-	"github.com/nanobox-io/golang-docker-client"
-	"github.com/nanobox-io/nanobox-boxfile"
+	docker "github.com/mu-box/golang-docker-client"
+	boxfile "github.com/mu-box/microbox-boxfile"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
 // isComponentRunning returns true if a service is already running
@@ -31,7 +31,7 @@ func componentImage(component *models.Component) (string, error) {
 
 	// the only way image can be empty is if it's a platform service
 	if image == "" {
-		image = fmt.Sprintf("nanobox/%s", component.Name)
+		image = fmt.Sprintf("mubox/%s", component.Name)
 	}
 
 	return image, nil

@@ -5,10 +5,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/commands/steps"
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/commands/steps"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -19,7 +19,7 @@ var (
 		Short: "Clean out any apps that no longer exist.",
 		Long: `
 Clean out any apps whose working directory no longer exists. This
-will remove all associated app information from your Nanobox database.
+will remove all associated app information from your Microbox database.
 `,
 		PreRun: steps.Run("start"),
 		Run:    cleanFn,

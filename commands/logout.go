@@ -3,8 +3,8 @@ package commands
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/nanobox-io/nanobox/processors"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/processors"
+	"github.com/mu-box/microbox/util/display"
 )
 
 var (
@@ -12,7 +12,7 @@ var (
 	// LogoutCmd ...
 	LogoutCmd = &cobra.Command{
 		Use:   "logout",
-		Short: "Remove your nanobox.io api token from your local nanobox client.",
+		Short: "Remove your microbox.cloud api token from your local microbox client.",
 		Long:  ``,
 		Run:   logoutFn,
 	}

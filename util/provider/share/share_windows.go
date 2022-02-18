@@ -9,8 +9,8 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/commands/server"
-	"github.com/nanobox-io/nanobox/util/config"
+	"github.com/mu-box/microbox/commands/server"
+	"github.com/mu-box/microbox/util/config"
 )
 
 type Request struct {
@@ -83,7 +83,7 @@ func (sh *ShareRPC) Add(req Request, resp *Response) error {
 	cmd := []string{
 		"net",
 		"share",
-		fmt.Sprintf("nanobox-%s=%s", req.AppID, req.Path),
+		fmt.Sprintf("microbox-%s=%s", req.AppID, req.Path),
 		"/unlimited",
 		fmt.Sprintf("/GRANT:%s,FULL", req.User),
 	}
@@ -147,7 +147,7 @@ func (sh *ShareRPC) Remove(req Request, resp *Response) error {
 	cmd := []string{
 		"net",
 		"share",
-		fmt.Sprintf("nanobox-%s", req.AppID),
+		fmt.Sprintf("microbox-%s", req.AppID),
 		"/delete",
 		"/y",
 	}

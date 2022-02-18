@@ -7,13 +7,13 @@ import (
 
 	"github.com/jcelliott/lumber"
 
-	"github.com/nanobox-io/nanobox/models"
+	"github.com/mu-box/microbox/models"
 )
 
-// Check for updates to nanobox every other day
+// Check for updates to microbox every other day
 const checkFrequency = (48 * time.Hour)
 
-// Check checks to see if there is an update available for the nanobox CLI
+// Check checks to see if there is an update available for the microbox CLI
 func Check() {
 	// load the update model
 	updateInfo, err := models.LoadUpdate()
@@ -44,13 +44,13 @@ func Check() {
 		//
 		fmt.Printf(`
 ------------------------------------------------
-Hey! A newer version of nanobox is available.
+Hey! A newer version of microbox is available.
 
   %s
 
 Run the following command to update:
 
-$ nanobox-update
+$ microbox-update
 ------------------------------------------------
 `, latest)
 
@@ -68,8 +68,8 @@ func checkable(updateInfo *models.Update) bool {
 	return time.Since(updateInfo.LastCheckAt) >= checkFrequency
 }
 
-// CheckTomorrow updates the last checked at time to a day later so nanobox will
-// check for updates tommorrow. This is only called if the check failed, likely
+// CheckTomorrow updates the last checked at time to a day later so microbox will
+// check for updates tomorrow. This is only called if the check failed, likely
 // due to a network error.
 func checkTomorrow(updateInfo *models.Update) error {
 	updateInfo.LastCheckAt = updateInfo.LastCheckAt.Add(24 * time.Hour)

@@ -1,11 +1,14 @@
-## 2.3.1 (unreleased)
+## 2.4.0 (unreleased)
 
 FEATURES:
+  - Switch to the microbox name and namespaces for all future distribution
+  - Build for all the same os/arch combos as Docker itself
+  - Switch from vendored dependencies to go modules
   - Allow `-v` and `--version` to print version [#612](https://github.com/nanobox-io/nanobox/pull/612)
   - Make nanobox-server service able to survive reboots [#612](https://github.com/nanobox-io/nanobox/pull/612)
   - Add dns alias' to run and dry-run containers [#592](https://github.com/nanobox-io/nanobox/pull/592)
   - Support service configuration enhancements [#586](https://github.com/nanobox-io/nanobox/pull/586)
-  - Support password protected ssh keys [#576](https://github.com/nanobox-io/nanobox/pull/576)[#580](https://github.com/nanobox-io/nanobox/pull/580)[#582](https://github.com/nanobox-io/nanobox/pull/582)
+  - Support password protected ssh keys [#576](https://github.com/nanobox-io/nanobox/pull/576) [#580](https://github.com/nanobox-io/nanobox/pull/580) [#582](https://github.com/nanobox-io/nanobox/pull/582)
   - Untrack vendored files [#567](https://github.com/nanobox-io/nanobox/pull/567)
 
 BUG FIXES:
@@ -14,7 +17,7 @@ BUG FIXES:
   - Fix panic on linux if nfs isn't running [#601](https://github.com/nanobox-io/nanobox/pull/601)
   - Handle `nanobox-update` not being in global path [#596](https://github.com/nanobox-io/nanobox/pull/596)
   - Fix fast notify watcher warning typos [#594](https://github.com/nanobox-io/nanobox/pull/594)
-  - Update `--help` docs for cli [#593](https://github.com/nanobox-io/nanobox/pull/593)[#598](https://github.com/nanobox-io/nanobox/pull/598)
+  - Update `--help` docs for cli [#593](https://github.com/nanobox-io/nanobox/pull/593) [#598](https://github.com/nanobox-io/nanobox/pull/598)
   - Only pull `nanobox/*` images on `update-images` [#591](https://github.com/nanobox-io/nanobox/pull/591)
   - Only add valid, un-password protected ssh keys [#572](https://github.com/nanobox-io/nanobox/pull/572)
   - Fix regression and allow multiple apps on osx [#571](https://github.com/nanobox-io/nanobox/pull/571)
@@ -24,8 +27,8 @@ BUG FIXES:
 ## 2.3.0 (Sept 1, 2017)
 
 FEATURES:
-  - Support setting custom tunnel destination port [#561](https://github.com/nanobox-io/nanobox/pull/561)[#564](https://github.com/nanobox-io/nanobox/pull/564)
-  - Support streaming production logs [#549](https://github.com/nanobox-io/nanobox/pull/549)[#562](https://github.com/nanobox-io/nanobox/pull/562)
+  - Support setting custom tunnel destination port [#561](https://github.com/nanobox-io/nanobox/pull/561) [#564](https://github.com/nanobox-io/nanobox/pull/564)
+  - Support streaming production logs [#549](https://github.com/nanobox-io/nanobox/pull/549) [#562](https://github.com/nanobox-io/nanobox/pull/562)
   - Allow either username or email address for login [#565](https://github.com/nanobox-io/nanobox/pull/565)
 
 BUG FIXES:
@@ -42,7 +45,7 @@ FEATURES:
   - Support loading evars from files [#535](https://github.com/nanobox-io/nanobox/pull/535)
   - Unify removing evars (case insensitivity) [#539](https://github.com/nanobox-io/nanobox/pull/535)
   - Add universal versioning [#506](https://github.com/nanobox-io/nanobox/pull/506)
-  - Add suggestions for common problems [#515](https://github.com/nanobox-io/nanobox/pull/515)[#517](https://github.com/nanobox-io/nanobox/pull/517)[#521](https://github.com/nanobox-io/nanobox/pull/521)
+  - Add suggestions for common problems [#515](https://github.com/nanobox-io/nanobox/pull/515) [#517](https://github.com/nanobox-io/nanobox/pull/517) [#521](https://github.com/nanobox-io/nanobox/pull/521)
 
 BUG FIXES:
   - Check for boxfile and validate in separate steps [#512](https://github.com/nanobox-io/nanobox/pull/512)
@@ -88,14 +91,14 @@ FEATURES:
 
 BUG FIXES:
   - Add idempotency to linux systemd service start [#399](https://github.com/nanobox-io/nanobox/pull/399)
-  - Fix an issue where the dev container disappeard unexpectedly [#402](https://github.com/nanobox-io/nanobox/pull/402)
+  - Fix an issue where the dev container disappeared unexpectedly [#402](https://github.com/nanobox-io/nanobox/pull/402)
   - Fix an issue that caused us to pull s3 for updates every time [#396](https://github.com/nanobox-io/nanobox/pull/396)
   - Fix an issue with /etc/exports on osx [#392](https://github.com/nanobox-io/nanobox/pull/392)
 
 FEATURES:
   - Make linux startup system more flexable [#397](https://github.com/nanobox-io/nanobox/pull/397)
   - Optimize display of summarized test [#395](https://github.com/nanobox-io/nanobox/pull/395)
-  - Add a check in for boxfile existance [#388](https://github.com/nanobox-io/nanobox/pull/388)
+  - Add a check in for boxfile existence [#388](https://github.com/nanobox-io/nanobox/pull/388)
 
 ## 2.0.3 (February 23, 2017)
 

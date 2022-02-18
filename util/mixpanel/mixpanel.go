@@ -6,8 +6,8 @@ import (
 	"github.com/jcelliott/lumber"
 	mp "github.com/timehop/go-mixpanel"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/util"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/util"
 )
 
 var token string

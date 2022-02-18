@@ -9,15 +9,16 @@ import (
 	"time"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	container_generator "github.com/nanobox-io/nanobox/generators/containers"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
-	// "github.com/nanobox-io/nanobox/util/fileutil"
-	"github.com/nanobox-io/nanobox/util/config"
-	"github.com/nanobox-io/nanobox/util/hookit"
-	"github.com/nanobox-io/nanobox/util/locker"
+	container_generator "github.com/mu-box/microbox/generators/containers"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
+
+	// "github.com/mu-box/microbox/util/fileutil"
+	"github.com/mu-box/microbox/util/config"
+	"github.com/mu-box/microbox/util/hookit"
+	"github.com/mu-box/microbox/util/locker"
 )
 
 var keys map[string]string
@@ -81,13 +82,13 @@ func setupContainer() error {
 
 	display.StartTask("Setting up container")
 	// run the configure hook
-	if _, err := hookit.DebugExec(container.ID, "configure", "{\"platform\":\"local\",\"config\":{}}", "info"); err != nil {
-		return util.ErrorAppend(err, "failed to run configure hook")
+	if _, err1 := hookit.DebugExec(container.ID, "configure", "{\"platform\":\"local\",\"config\":{}}", "info"); err1 != nil {
+		return util.ErrorAppend(err1, "failed to run configure hook")
 	}
 
 	// run the start hook
-	if _, err := hookit.DebugExec(container.ID, "start", "{}", "info"); err != nil {
-		return util.ErrorAppend(err, "failed to run start hook")
+	if _, err1 := hookit.DebugExec(container.ID, "start", "{}", "info"); err1 != nil {
+		return util.ErrorAppend(err1, "failed to run start hook")
 	}
 
 	// run the start hook

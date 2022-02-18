@@ -1,4 +1,4 @@
-package nanoagent
+package microagent
 
 import (
 	"fmt"
@@ -8,8 +8,8 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/display"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/display"
 )
 
 func Tunnel(key, location, port, name string) error {
@@ -20,7 +20,7 @@ func Tunnel(key, location, port, name string) error {
 	// establish a connection and just leave it open.
 	req, err := http.NewRequest("POST", fmt.Sprintf("/tunnel?key=%s", key), nil)
 	if err != nil {
-		return fmt.Errorf("failed to generate a request for nanoagent: %s", err.Error())
+		return fmt.Errorf("failed to generate a request for microagent: %s", err.Error())
 	}
 
 	// set noproxy because this connection allows more multiple connections
@@ -69,7 +69,7 @@ func Tunnel(key, location, port, name string) error {
 		go handleConnection(conn, key, location)
 	}
 
-	return nil
+	// return nil
 }
 
 func handleConnection(conn net.Conn, key, location string) {

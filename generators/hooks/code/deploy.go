@@ -3,8 +3,8 @@ package code
 import (
 	"encoding/json"
 
-	"github.com/nanobox-io/nanobox-boxfile"
-	"github.com/nanobox-io/nanobox/models"
+	boxfile "github.com/mu-box/microbox-boxfile"
+	"github.com/mu-box/microbox/models"
 )
 
 type (

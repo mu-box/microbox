@@ -4,14 +4,14 @@ import (
 	"fmt"
 
 	"github.com/jcelliott/lumber"
-	"github.com/nanobox-io/golang-docker-client"
+	docker "github.com/mu-box/golang-docker-client"
 
-	"github.com/nanobox-io/nanobox/models"
-	"github.com/nanobox-io/nanobox/processors/app"
-	"github.com/nanobox-io/nanobox/processors/provider"
-	"github.com/nanobox-io/nanobox/util"
-	"github.com/nanobox-io/nanobox/util/locker"
-	util_provider "github.com/nanobox-io/nanobox/util/provider"
+	"github.com/mu-box/microbox/models"
+	"github.com/mu-box/microbox/processors/app"
+	"github.com/mu-box/microbox/processors/provider"
+	"github.com/mu-box/microbox/util"
+	"github.com/mu-box/microbox/util/locker"
+	util_provider "github.com/mu-box/microbox/util/provider"
 )
 
 // Destroy brings down the environment setup
@@ -52,11 +52,11 @@ func Destroy(env *models.Env) error {
 	}
 
 	// remove volumes
-	docker.VolumeRemove(fmt.Sprintf("nanobox_%s_app", env.ID))
-	docker.VolumeRemove(fmt.Sprintf("nanobox_%s_cache", env.ID))
-	docker.VolumeRemove(fmt.Sprintf("nanobox_%s_mount", env.ID))
-	docker.VolumeRemove(fmt.Sprintf("nanobox_%s_deploy", env.ID))
-	docker.VolumeRemove(fmt.Sprintf("nanobox_%s_build", env.ID))
+	docker.VolumeRemove(fmt.Sprintf("microbox_%s_app", env.ID))
+	docker.VolumeRemove(fmt.Sprintf("microbox_%s_cache", env.ID))
+	docker.VolumeRemove(fmt.Sprintf("microbox_%s_mount", env.ID))
+	docker.VolumeRemove(fmt.Sprintf("microbox_%s_deploy", env.ID))
+	docker.VolumeRemove(fmt.Sprintf("microbox_%s_build", env.ID))
 
 	// remove the environment
 	if err := env.Delete(); err != nil {
