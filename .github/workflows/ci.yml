@@ -90,3 +90,11 @@ jobs:
       - name: Publish
         run: |
           ./scripts/upload.sh
+
+      - name: Rebuild Installers
+        if: github.event_name != 'pull_request' && github.repository_owner == 'mu-box'
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          repository: mu-box/microbox-installers
+          token: ${{ secrets.INSTALLERS_TOKEN }}
+          event-type: rebuild
