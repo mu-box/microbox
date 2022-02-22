@@ -91,6 +91,21 @@ jobs:
         run: |
           ./scripts/upload.sh
 
+      - name: Extract version
+        id: extract
+        run: echo "::set-output name=version::$(cat .build/v*/version | sed 's/Microbox Version //')"
+
+      - name: Spam Discord
+        uses: sarisia/actions-status-discord@v1
+        if: github.actor != 'nektos/act'
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nodetail: true
+          title: A new version of Microbox is ready!
+          description: |
+            Version `${{ steps.extract.outputs.version }}`
+            Run `microbox-update` to grab it!
+
       - name: Rebuild Installers
         if: github.event_name != 'pull_request' && github.repository_owner == 'mu-box'
         uses: peter-evans/repository-dispatch@v1.1.3
