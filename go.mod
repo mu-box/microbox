@@ -21,7 +21,7 @@ require (
 	github.com/timehop/go-mixpanel v0.0.0-20150630220933-9b81eaf1f33e
 	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
-	golang.org/x/sys v0.0.0-20210915083310-ed5796bab164
+	golang.org/x/sys v0.1.0
 )
 
 require (
