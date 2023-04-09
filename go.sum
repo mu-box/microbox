@@ -1,6 +1,4 @@
 filippo.io/edwards25519 v1.0.0-rc.1 h1:m0VOOB23frXZvAOK44usCgLWvtsxIoMCTBGJZlpmGfU=
-github.com/Azure/go-ansiterm v0.0.0-20160425224613-388960b65524 h1:kyo7Ce1d2RtxZBCp4y/ommREtHPeXUU2bYRJoCgyJX8=
-github.com/Azure/go-ansiterm v0.0.0-20160425224613-388960b65524/go.mod h1:LmzpDX56iTiv29bbRTIsUNlaFfuhWRQBWjQdVyAevI8=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Microsoft/go-winio v0.3.8 h1:dvxbxtpTIjdAbx2OtL26p4eq0iEvys/U5yrsTJb3NZI=
@@ -22,8 +20,8 @@ github.com/deckarep/golang-set v1.8.0 h1:sk9/l/KqpunDwP7pSjUg0keiOOLEnOBHzykLrsP
 github.com/deckarep/golang-set v1.8.0/go.mod h1:5nI87KwE7wgsBU1F4GKAw2Qod7p5kyS383rP6+o6qqo=
 github.com/docker/distribution v2.8.0+incompatible h1:l9EaZDICImO1ngI+uTifW+ZYvvz7fKISBAKpg+MbWbY=
 github.com/docker/distribution v2.8.0+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
-github.com/docker/docker v1.4.2-0.20160819200957-09b929083d34 h1:WlCZW/K82TtICZXcPAQIK6cpGPbXu38vkJ2e01AawXY=
-github.com/docker/docker v1.4.2-0.20160819200957-09b929083d34/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
+github.com/docker/docker v1.6.1 h1:4xYASHy5cScPkLD7PO0uTmnVc860m9NarPN1X8zeMe8=
+github.com/docker/docker v1.6.1/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/engine-api v0.4.1-0.20160908232104-4290f40c0566 h1:S02HakxupRs+HZdHv6qfFfb6EDK+VZApNTYmVFppg7I=
 github.com/docker/engine-api v0.4.1-0.20160908232104-4290f40c0566/go.mod h1:xtQCpzf4YysNZCVFfIGIm7qfLvYbxtLkEVVfKhTVOvw=
 github.com/docker/go-connections v0.2.0 h1:tV+S3i76CmPRYmR3NMDUFyr2HTP+3gL+xEPy146TPig=

@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/boltdb/bolt v1.1.1-0.20151112151049-0b00effdd7a8
-	github.com/docker/docker v1.4.2-0.20160819200957-09b929083d34
+	github.com/docker/docker v1.6.1
 	github.com/fsnotify/fsnotify v1.3.2-0.20160816051541-f12c6236fe7b
 	github.com/jcelliott/lumber v0.0.0-20160324203708-dd349441af25
 	github.com/lyondhill/vtclean v0.0.0-20170214195231-ea70112eba8c
@@ -25,7 +25,6 @@ require (
 )
 
 require (
-	github.com/Azure/go-ansiterm v0.0.0-20160425224613-388960b65524 // indirect
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/Microsoft/go-winio v0.3.8 // indirect
 	github.com/Sirupsen/logrus v0.8.6-0.20150724014903-11538ee6888f // indirect
