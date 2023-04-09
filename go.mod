@@ -20,8 +20,8 @@ require (
 	github.com/spf13/viper v0.0.0-20160111150723-a212099cbe6f
 	github.com/timehop/go-mixpanel v0.0.0-20150630220933-9b81eaf1f33e
 	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
-	golang.org/x/sys v0.0.0-20210915083310-ed5796bab164
+	golang.org/x/net v0.7.0
+	golang.org/x/sys v0.5.0
 )
 
 require (
@@ -55,7 +55,7 @@ require (
 	github.com/spf13/jwalterweatherman v0.0.0-20151231185856-d00654080cdd // indirect
 	github.com/spf13/pflag v0.0.0-20151218134703-7f60f83a2c81 // indirect
 	github.com/stretchr/testify v1.8.2 // indirect
-	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1 // indirect
+	golang.org/x/term v0.5.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/fsnotify.v1 v1.2.9 // indirect
 	gopkg.in/yaml.v2 v2.0.0-20151201162745-f7716cbe52ba // indirect
