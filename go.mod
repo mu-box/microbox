@@ -19,7 +19,7 @@ require (
 	github.com/spf13/cobra v0.0.0-20160117030938-8e91712f174c
 	github.com/spf13/viper v0.0.0-20160111150723-a212099cbe6f
 	github.com/timehop/go-mixpanel v0.0.0-20150630220933-9b81eaf1f33e
-	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
+	golang.org/x/crypto v0.1.0
 	golang.org/x/net v0.7.0
 	golang.org/x/sys v0.5.0
 )
