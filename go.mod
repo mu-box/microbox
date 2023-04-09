@@ -1,6 +1,6 @@
 module github.com/mu-box/microbox
 
-go 1.17
+go 1.20
 
 require (
 	github.com/boltdb/bolt v1.1.1-0.20151112151049-0b00effdd7a8
@@ -19,9 +19,9 @@ require (
 	github.com/spf13/cobra v0.0.0-20160117030938-8e91712f174c
 	github.com/spf13/viper v0.0.0-20160111150723-a212099cbe6f
 	github.com/timehop/go-mixpanel v0.0.0-20150630220933-9b81eaf1f33e
-	golang.org/x/crypto v0.0.0-20160912150327-e311231e8319
-	golang.org/x/net v0.0.0-20170824174428-57efc9c3d9f9
-	golang.org/x/sys v0.0.0-20170322234810-8fd966b47dbd
+	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
+	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
+	golang.org/x/sys v0.0.0-20210915083310-ed5796bab164
 )
 
 require (
@@ -29,24 +29,35 @@ require (
 	github.com/BurntSushi/toml v0.1.1-0.20160102144748-5c4df71dfe9a // indirect
 	github.com/Microsoft/go-winio v0.3.8 // indirect
 	github.com/Sirupsen/logrus v0.8.6-0.20150724014903-11538ee6888f // indirect
+	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/engine-api v0.4.1-0.20160908232104-4290f40c0566 // indirect
 	github.com/docker/go-connections v0.2.0 // indirect
 	github.com/docker/go-units v0.3.0 // indirect
 	github.com/docker/machine v0.12.2 // indirect
+	github.com/gorilla/context v1.1.1 // indirect
+	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/gorilla/pat v1.0.1 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/hcl v0.0.0-20160119202737-578dd9746824 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/kr/pretty v0.0.0-20150520163514-e6ac2fc51e89 // indirect
-	github.com/kr/text v0.0.0-20150905224508-bb797dc4fb83 // indirect
+	github.com/kr/pretty v0.2.1 // indirect
+	github.com/kr/text v0.1.0 // indirect
+	github.com/lib/pq v1.10.7 // indirect
 	github.com/magiconair/properties v1.6.1-0.20151221213149-c81f9d71af8f // indirect
-	github.com/mitchellh/go-wordwrap v0.0.0-20150314170334-ad45545899c7 // indirect
 	github.com/mitchellh/mapstructure v0.0.0-20150717051158-281073eb9eb0 // indirect
-	github.com/mu-box/microbox-golang-stylish v0.0.0-20160617201242-030019c3e9a9 // indirect
+	github.com/mu-box/golang-microauth v0.0.0-20230408181947-28e1d1f08c37 // indirect
+	github.com/mu-box/golang-scribble v0.0.0-20180621225840-336beac0a992 // indirect
+	github.com/nanobox-io/nanobox-boxfile v0.0.0-20190311153815-2fc39f6df5e0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/runc v0.0.9-0.20160219032739-0107c7fb6cef // indirect
 	github.com/spf13/cast v0.0.0-20151218135219-ee7b3e035316 // indirect
 	github.com/spf13/jwalterweatherman v0.0.0-20151231185856-d00654080cdd // indirect
 	github.com/spf13/pflag v0.0.0-20151218134703-7f60f83a2c81 // indirect
+	github.com/stretchr/testify v1.8.2 // indirect
+	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1 // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/fsnotify.v1 v1.2.9 // indirect
 	gopkg.in/yaml.v2 v2.0.0-20151201162745-f7716cbe52ba // indirect
+	launchpad.net/goyaml v0.0.0-20140305200416-000000000051 // indirect
 )

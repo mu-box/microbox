@@ -155,7 +155,7 @@ func (machine DockerMachine) Create() error {
 		"--driver",
 		"virtualbox",
 		"--virtualbox-boot2docker-url",
-		"https://d1ormdui8qdvue.cloudfront.net/boot2docker/v1/boot2docker.iso",
+		"https://s3.amazonaws.com/tools.microbox.cloud/boot2docker/v1/boot2docker.iso",
 		"--engine-env",
 		fmt.Sprintf("HTTP_PROXY=%s", os.Getenv("HTTP_PROXY")),
 		"--engine-env",

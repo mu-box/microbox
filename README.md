@@ -1,5 +1,5 @@
-[![microboxdesktop logo](http://assets.microbox.rocks/readme-headers/microboxdesktop.png)](http://microbox.cloud/open-source#microboxdesktop)
-[![Build Status](https://travis-ci.org/mu-box/microbox.svg)](https://travis-ci.org/mu-box/microbox)
+[![microboxdesktop logo](http://microbox.rocks/assets/readme-headers/microboxdesktop.png)](http://microbox.cloud/open-source#microboxdesktop)
+[![Build Status](https://github.com/mu-box/microbox/actions/workflows/ci.yaml/badge.svg)](https://github.com/mu-box/microbox/actions)
 
 ## Microbox
 
@@ -81,4 +81,4 @@ Microbox uses [govendor](https://github.com/kardianos/govendor#the-vendor-tool-f
 
 For help using Microbox or if you have any questions/suggestions, please reach out to help@microbox.cloud or find us on [slack](https://slack.microbox.rocks/). You can also [create a new issue on this project](https://github.com/mu-box/microbox/issues/new).
 
-[![microbox logo](http://assets.microbox.rocks/open-src/microbox-open-src.png)](https://microbox.cloud/open-source/)
+[![microbox logo](http://microbox.rocks/assets/open-src/microbox-open-src.png)](https://microbox.cloud/open-source/)
