@@ -30,7 +30,7 @@ require (
 	github.com/Microsoft/go-winio v0.3.8 // indirect
 	github.com/Sirupsen/logrus v0.8.6-0.20150724014903-11538ee6888f // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
-	github.com/docker/distribution v2.7.1+incompatible // indirect
+	github.com/docker/distribution v2.8.0+incompatible // indirect
 	github.com/docker/engine-api v0.4.1-0.20160908232104-4290f40c0566 // indirect
 	github.com/docker/go-connections v0.2.0 // indirect
 	github.com/docker/go-units v0.3.0 // indirect
