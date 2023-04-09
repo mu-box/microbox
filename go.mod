@@ -26,14 +26,14 @@ require (
 
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20160425224613-388960b65524 // indirect
-	github.com/BurntSushi/toml v0.1.1-0.20160102144748-5c4df71dfe9a // indirect
+	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/Microsoft/go-winio v0.3.8 // indirect
 	github.com/Sirupsen/logrus v0.8.6-0.20150724014903-11538ee6888f // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/engine-api v0.4.1-0.20160908232104-4290f40c0566 // indirect
 	github.com/docker/go-connections v0.2.0 // indirect
-	github.com/docker/go-units v0.3.0 // indirect
+	github.com/docker/go-units v0.4.0 // indirect
 	github.com/docker/machine v0.12.2 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
@@ -50,7 +50,7 @@ require (
 	github.com/mu-box/golang-scribble v0.0.0-20180621225840-336beac0a992 // indirect
 	github.com/nanobox-io/nanobox-boxfile v0.0.0-20190311153815-2fc39f6df5e0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
-	github.com/opencontainers/runc v0.0.9-0.20160219032739-0107c7fb6cef // indirect
+	github.com/opencontainers/runc v1.1.5 // indirect
 	github.com/spf13/cast v0.0.0-20151218135219-ee7b3e035316 // indirect
 	github.com/spf13/jwalterweatherman v0.0.0-20151231185856-d00654080cdd // indirect
 	github.com/spf13/pflag v0.0.0-20151218134703-7f60f83a2c81 // indirect
@@ -58,6 +58,6 @@ require (
 	golang.org/x/term v0.5.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/fsnotify.v1 v1.2.9 // indirect
-	gopkg.in/yaml.v2 v2.0.0-20151201162745-f7716cbe52ba // indirect
+	gopkg.in/yaml.v2 v2.2.2 // indirect
 	launchpad.net/goyaml v0.0.0-20140305200416-000000000051 // indirect
 )
