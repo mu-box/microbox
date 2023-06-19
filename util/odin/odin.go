@@ -23,7 +23,7 @@ const (
 	MICROBOX = "https://api.microbox.cloud/v1/"
 	WYCROBOX = "https://api.xn-box-wyc.cloud/v1/"
 	DEV      = "http://api.microbox.local:8080/v1/"
-	SIM      = "http://api.microbox.test/v1/"
+	SIM      = "https://api.microbox.test/v1/"
 )
 
 var (

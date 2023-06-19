@@ -43,6 +43,8 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    # add static once all the static checks pass
+    # this will likely require an extensive refactor
     needs: test
     if: github.event_name != 'pull_request'
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.

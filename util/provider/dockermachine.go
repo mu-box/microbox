@@ -37,7 +37,7 @@ func init() {
 
 // Valid ensures docker-machine is installed and available
 func (machine DockerMachine) Valid() (error, []string) {
-	var masterErr error // will hold a collection of any errors hit
+	var mainErr error // will hold a collection of any errors hit
 
 	missingParts := []string{}
 
@@ -49,14 +49,14 @@ func (machine DockerMachine) Valid() (error, []string) {
 		// append rather than return here so that we can check everything before erroring.
 		// otherwise a user could error multiple times, learning about one problem at a time.
 		missingParts = append(missingParts, "vboxmanage")
-		masterErr = fmt.Errorf("missing vboxmanage - %q", err.Error())
+		mainErr = fmt.Errorf("missing vboxmanage - %q", err.Error())
 	}
 	// check output for errors/instruction
 	if bytes.Contains(out, []byte("WARNING")) {
-		if masterErr == nil {
-			masterErr = fmt.Errorf("vboxmanage gave warning - \n%s", out)
+		if mainErr == nil {
+			mainErr = fmt.Errorf("vboxmanage gave warning - \n%s", out)
 		} else {
-			masterErr = fmt.Errorf("%s - vboxmanage gave warning - \n%s", masterErr.Error(), out)
+			mainErr = fmt.Errorf("%s - vboxmanage gave warning - \n%s", mainErr.Error(), out)
 		}
 	}
 
@@ -64,10 +64,10 @@ func (machine DockerMachine) Valid() (error, []string) {
 	config, _ := models.LoadConfig()
 
 	if config.MountType == "native" {
-		if len(missingParts) == 0 && masterErr == nil {
+		if len(missingParts) == 0 && mainErr == nil {
 			return nil, missingParts
 		}
-		return masterErr, missingParts
+		return mainErr, missingParts
 	}
 
 	// net share checking
@@ -76,23 +76,23 @@ func (machine DockerMachine) Valid() (error, []string) {
 		out, err := exec.Command("netstat", "-tln").CombinedOutput()
 		if err != nil {
 			missingParts = append(missingParts, "nfs-kernel-server")
-			if masterErr == nil {
-				masterErr = fmt.Errorf("failed to check for netfs - %s", err.Error())
+			if mainErr == nil {
+				mainErr = fmt.Errorf("failed to check for netfs - %s", err.Error())
 			} else {
-				masterErr = fmt.Errorf("%s - failed to check for netfs - %s", masterErr.Error(), err.Error())
+				mainErr = fmt.Errorf("%s - failed to check for netfs - %s", mainErr.Error(), err.Error())
 			}
 		} else if !bytes.Contains(out, []byte("2049")) {
 			missingParts = append(missingParts, "nfs-kernel-server")
-			if masterErr == nil {
-				masterErr = fmt.Errorf("missing or not running netfs")
+			if mainErr == nil {
+				mainErr = fmt.Errorf("missing or not running netfs")
 			} else {
-				masterErr = fmt.Errorf("%s - missing or not running netfs", masterErr.Error())
+				mainErr = fmt.Errorf("%s - missing or not running netfs", mainErr.Error())
 			}
 		}
 
 		if err := exec.Command("exportfs").Run(); err != nil {
 			missingParts = append(missingParts, "exportfs")
-			masterErr = fmt.Errorf("%s - missing exportfs - %q", masterErr.Error(), err.Error())
+			mainErr = fmt.Errorf("%s - missing exportfs - %q", mainErr.Error(), err.Error())
 		}
 
 	case "darwin":
@@ -105,7 +105,7 @@ func (machine DockerMachine) Valid() (error, []string) {
 
 	}
 
-	return masterErr, missingParts
+	return mainErr, missingParts
 }
 
 func (machine DockerMachine) Status() string {

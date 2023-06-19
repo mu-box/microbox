@@ -68,7 +68,7 @@ Use "microbox [command] --help" for more information about a command.
 ### Documentation
 
 - Microbox documentation is available at [docs.microbox.cloud](https://docs.microbox.cloud/).
-- Guides for popular languages, frameworks and services are available at [guides.microbox.cloud](http://guides.microbox.cloud).
+- Guides for popular languages, frameworks and services are available at [guides.microbox.cloud](https://guides.microbox.cloud).
 
 
 ## Contributing

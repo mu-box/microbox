@@ -58,7 +58,7 @@ func Run(path string) error {
 	if !strings.Contains(path, "microbox-update") {
 		fmt.Printf("\nUpdated to version: %s\n\n", getCurrentVersion(path))
 		fmt.Println("Check out the release notes here:")
-		fmt.Println("https://github.com/mu-box/microbox/blob/master/CHANGELOG.md")
+		fmt.Println("https://github.com/mu-box/microbox/blob/main/CHANGELOG.md")
 	}
 
 	return update.Save()
